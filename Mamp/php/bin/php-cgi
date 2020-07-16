@@ -1,0 +1,7 @@
+#!/bin/sh
+PHPRC=/Users/tvitoux/Mamp/php/etc
+export PHPRC
+PHP_PEAR_SYSCONF_DIR=/Users/tvitoux/Mamp/php/etc
+export PHP_PEAR_SYSCONF_DIR
+. /Users/tvitoux/Mamp/php/../scripts/setenv.sh
+exec /Users/tvitoux/Mamp/php/bin/php-cgi.bin "$@"

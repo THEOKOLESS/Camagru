@@ -1,0 +1,6 @@
+#!/bin/sh
+
+ZDOTDIR=/Users/tvitoux/Mamp
+export ZDOTDIR
+
+exec /bin/zsh

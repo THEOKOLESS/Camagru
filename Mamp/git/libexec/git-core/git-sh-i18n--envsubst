@@ -1,0 +1,5 @@
+#!/bin/sh
+
+. /Users/tvitoux/Mamp/scripts/setenv.sh
+
+exec /Users/tvitoux/Mamp/git/libexec/git-core/.git-sh-i18n--envsubst.bin  "$@"

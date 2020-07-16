@@ -1,0 +1,98 @@
+#! /bin/sh
+
+SED="/usr/bin/sed"
+prefix="/Users/tvitoux/Mamp/php"
+datarootdir="/Users/tvitoux/Mamp/php/php"
+exec_prefix="${prefix}"
+version="7.4.8"
+vernum="70408"
+include_dir="${prefix}/include/php"
+includes="-I$include_dir -I$include_dir/main -I$include_dir/TSRM -I$include_dir/Zend -I$include_dir/ext -I$include_dir/ext/date/lib"
+ldflags=" -L/Users/tvitoux/Mamp/common/lib -L/bitnami/mamp74stack-osx-x64/output/sqlite/lib -L/bitnami/mamp74stack-osx-x64/src/imap-2007f/c-client"
+libs=" -lc-client  -ltidy -lresolv -lpam -liconv -liconv -lgmp -lintl -lbz2 -lm  -lxml2 -lssl -lcrypto -lsqlite3 -lz -lcurl -lxml2 -lssl -lcrypto -lz -lpng15 -ljpeg -lssl -lcrypto -lonig -lsqlite3 -lxml2 -lxml2 -lxml2 -lxml2 -lxml2 -lxml2 -lxslt -lzip -lz -lssl -lcrypto "
+extension_dir='/Users/tvitoux/Mamp/php/lib/php/extensions'
+man_dir=`eval echo ${datarootdir}/man`
+program_prefix=""
+program_suffix=""
+exe_extension=""
+php_cli_binary=NONE
+php_cgi_binary=NONE
+configure_options=" '--prefix=/Users/tvitoux/Mamp/php' '--enable-fpm' '--with-fpm-user=daemon' '--with-fpm-group=daemon' '--with-apxs2=/Users/tvitoux/Mamp/apache2/bin/apxs' '--with-zlib-dir=/Users/tvitoux/Mamp/common' '--enable-mbstring=all' '--enable-soap' '--enable-bcmath' '--enable-ftp' '--with-xmlrpc' '--enable-cgi' '--with-imap=/bitnami/mamp74stack-osx-x64/src/imap-2007f' '--with-imap-ssl=/Users/tvitoux/Mamp/common' '--with-png-dir=/Users/tvitoux/Mamp/common' '--with-gd' '--with-zlib' '--with-curl=/Users/tvitoux/Mamp/common' '--with-jpeg-dir=/Users/tvitoux/Mamp/common' '--enable-exif' '--with-openssl=/Users/tvitoux/Mamp/common' '--enable-calendar' '--enable-ctype' '--enable-pcntl' '--enable-session' '--enable-zip' '--with-bz2=/Users/tvitoux/Mamp/common' '--enable-sockets' '--with-mcrypt=/Users/tvitoux/Mamp/common' '--with-icu-dir=/Users/tvitoux/Mamp/common' '--with-tidy=/Users/tvitoux/Mamp/common' '--with-mysqli=mysqlnd' '--with-pdo-mysql=mysqlnd' '--with-pdo_sqlite=/bitnami/mamp74stack-osx-x64/output/sqlite' '--with-sqlite3=/bitnami/mamp74stack-osx-x64/output/sqlite' '--with-iconv=/usr' '--with-libxml-dir=/usr' '--with-xsl=/usr' '--enable-mbstring' '--with-freetype-dir=/Users/tvitoux/Mamp/common' '--with-gmp=/Users/tvitoux/Mamp/common' '--with-gettext=/Users/tvitoux/Mamp/common' '--with-libzip=/Users/tvitoux/Mamp/common' '--with-pear' '--enable-gd' '--with-jpeg' '--with-libwebp' '--with-zip' '--disable-huge-code-pages' 'PKG_CONFIG_PATH=/bitnami/mamp74stack-osx-x64/output/sqlite/lib/pkgconfig:/Users/tvitoux/Mamp/common/lib/pkgconfig' 'LIBXML_CFLAGS=-I/usr/include/libxml2' 'LIBXML_LIBS=-L/usr/lib -lxml2' 'JPEG_CFLAGS=-I/Users/tvitoux/Mamp/common/include' 'JPEG_LIBS=-L/Users/tvitoux/Mamp/common/lib -ljpeg' 'XSL_CFLAGS=-I/usr/include/libxslt' 'XSL_LIBS=-L/usr/lib -lxslt'"
+php_sapis=" apache2handler cli fpm phpdbg cgi"
+ini_dir=""
+ini_path="/Users/tvitoux/Mamp/php/lib"
+
+# Set php_cli_binary and php_cgi_binary if available
+for sapi in $php_sapis; do
+  case $sapi in
+  cli)
+    php_cli_binary="${exec_prefix}/bin/${program_prefix}php${program_suffix}${exe_extension}"
+    ;;
+  cgi)
+    php_cgi_binary="${exec_prefix}/bin/${program_prefix}php-cgi${program_suffix}${exe_extension}"
+    ;;
+  esac
+done
+
+# Determine which (if any) php binary is available
+if test "$php_cli_binary" != "NONE"; then
+  php_binary="$php_cli_binary"
+else
+  php_binary="$php_cgi_binary"
+fi
+
+# Remove quotes
+configure_options=`echo $configure_options | $SED -e "s#'##g"`
+
+case "$1" in
+--prefix)
+  echo $prefix;;
+--includes)
+  echo $includes;;
+--ldflags)
+  echo $ldflags;;
+--libs)
+  echo $libs;;
+--extension-dir)
+  echo $extension_dir;;
+--include-dir)
+  echo $include_dir;;
+--php-binary)
+  echo $php_binary;;
+--php-sapis)
+  echo $php_sapis;;
+--configure-options)
+  echo $configure_options;;
+--man-dir)
+  echo $man_dir;;
+--ini-path)
+  echo $ini_path;;
+--ini-dir)
+  echo $ini_dir;;
+--version)
+  echo $version;;
+--vernum)
+  echo $vernum;;
+*)
+  cat << EOF
+Usage: $0 [OPTION]
+Options:
+  --prefix            [$prefix]
+  --includes          [$includes]
+  --ldflags           [$ldflags]
+  --libs              [$libs]
+  --extension-dir     [$extension_dir]
+  --include-dir       [$include_dir]
+  --man-dir           [$man_dir]
+  --php-binary        [$php_binary]
+  --php-sapis         [$php_sapis]
+  --ini-path          [$ini_path]
+  --ini-dir           [$ini_dir]
+  --configure-options [$configure_options]
+  --version           [$version]
+  --vernum            [$vernum]
+EOF
+  exit 1;;
+esac
+
+exit 0

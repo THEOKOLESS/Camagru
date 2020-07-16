@@ -1,0 +1,2 @@
+
+. /Users/tvitoux/Mamp/.bitnamirc

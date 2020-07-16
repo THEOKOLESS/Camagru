@@ -1,0 +1,4 @@
+#!/bin/sh
+. /Users/tvitoux/Mamp/php/../scripts/setenv.sh
+
+exec /Users/tvitoux/Mamp/php/bin/composer.phar "$@"
