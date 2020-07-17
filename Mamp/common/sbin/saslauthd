@@ -1,6 +1,0 @@
-#!/bin/sh
-
-. /Users/tvitoux/Mamp/scripts/setenv.sh
-SASL_PATH="/Users/tvitoux/Mamp/common/lib/sasl2"
-                export SASL_PATH
-exec /Users/tvitoux/Mamp/common/sbin/.saslauthd.bin -f "/Users/tvitoux/Mamp/common/etc/sasldb2" "$@"

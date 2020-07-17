@@ -1,5 +1,0 @@
-#!/bin/sh
-
-. /Users/tvitoux/Mamp/scripts/setenv.sh
-
-exec /Users/tvitoux/Mamp/common/bin/.compare.bin  "$@"

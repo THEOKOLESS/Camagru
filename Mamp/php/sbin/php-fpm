@@ -1,5 +1,0 @@
-#!/bin/sh
-
-. /Users/tvitoux/Mamp/scripts/setenv.sh
-
-exec /Users/tvitoux/Mamp/php/sbin/.php-fpm.bin -y /Users/tvitoux/Mamp/php/etc/php-fpm.conf -p /Users/tvitoux/Mamp/php/var/ -c /Users/tvitoux/Mamp/php/etc/php.ini "$@"
