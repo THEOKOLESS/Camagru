@@ -1,3 +1,0 @@
-#!/bin/sh
-. /Users/tvitoux/Mamp/apache2/bin/envvars
-exec /Users/tvitoux/Mamp/apache2/bin/logresolve.bin "$@"
