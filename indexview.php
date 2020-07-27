@@ -10,6 +10,6 @@
 <body>
     <?php include("menu.php"); ?>
         <h1>Camagru</h1>
-9
+20
 </body>
 </html>

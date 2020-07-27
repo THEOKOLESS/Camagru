@@ -17,17 +17,17 @@ dbCreate($DB_USER, $DB_PASSWORD, $pdoOptions);
 $db = dbConnect();
 
 if($db){
-    // on creer la table users et ses champs
+    // on creer la table users et ses champs si elle n'existe pas
         $sql = "CREATE TABLE IF NOT EXISTS `".DB_TABLE."` (
         id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
         username VARCHAR(30) NOT NULL,
-        password VARCHAR(30) NOT NULL,
-        email VARCHAR(50),
+        pwd VARCHAR(255) NOT NULL,
+        email VARCHAR(50) NOT NULL,
         reg_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
         )";
         $db->prepare($sql)->execute();
     }
-
+//creation de la bdd si elle n'existe pas
 function dbCreate($DB_USER, $DB_PASSWORD, $pdoOptions){
     
 
