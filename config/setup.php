@@ -23,6 +23,8 @@ if($db){
         username VARCHAR(30) NOT NULL,
         pwd VARCHAR(255) NOT NULL,
         email VARCHAR(50) NOT NULL,
+        cle VARCHAR(32),
+        actif INT(6) DEFAULT 0,
         reg_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
         )";
         $db->prepare($sql)->execute();

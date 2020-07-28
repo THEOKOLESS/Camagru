@@ -5,13 +5,14 @@
 
 <?php
 	require 'config/setup.php';
-	define('MAIL_TO','theophile.vitoux@gmail.com');
 	$errors = array();
 	$username = '';
 	$email = '';
 	$pwd = '';
 	$pwd_bis = '';
 	$db = dbConnect();
+	$flag = 0; // clear form ou pas
+	$cle = md5(microtime(TRUE)*100000);
 
 
 	function check_bdd()
@@ -38,13 +39,14 @@
 
 	//add a la bdd
 	function add_user(){
-		global  $username, $email, $pwd, $db;
+		global  $username, $email, $pwd, $db, $cle;
 		
-	  $req = $db->prepare('INSERT INTO users(username, pwd, email) VALUES(:username, :pwd, :email)');
+	  	$req = $db->prepare('INSERT INTO users(username, pwd, email, cle) VALUES(:username, :pwd, :email, :cle)');
 		$req->execute(array(
 		'username' => $username,
 		'pwd' => password_hash($pwd, PASSWORD_DEFAULT),
-		'email' => strtolower($email)
+		'email' => strtolower($email),
+		'cle' => $cle
 		));
 	}
 	
@@ -72,7 +74,7 @@
         }
 
         return ($errors == $errors_init);
-    }
+	}
 
 	function validate_form(){
 
@@ -112,7 +114,6 @@
 		}else{
 			$errors[] = 'Veuillez répeter votre mot de passe';
 		}
-		echo "pwd 1 [ " . password_hash($pwd, PASSWORD_DEFAULT) . " ] \n" . " Pwd 2 [ " .  password_hash($pwd_bis, PASSWORD_DEFAULT) . " ] \n";
 		if(count($errors)){
 			return false;
 		}else{
@@ -127,13 +128,10 @@
 
 
 	function display_message($errors){
-		if(!isset($_POST['submit'])){
-			return;
-		}
 		if(count($errors) === 0){
 		?>
 			<div class="alert alert-success">
-				<p>Bienvenue !</p>
+				<p>Vous allez recevoir un mail de confirmation a l'adresse indique</p>
 			</div>
 		<?php
 		}else{
@@ -152,10 +150,35 @@
 		}
 	}
 
+
+
 	/**
 	 * start form processing
 	 */
+	function send_mail(){
+		global $username, $cle, $email;
+		$destinataire = $email;
+		$sujet = "clique ici many" ;
+		$entete = "From: tktjesuispasun@Gros.Hacker" ;
+		$message = 'Bienvenue sur Camagru,
+
+		Pour activer votre compte, veuillez cliquer sur le lien ci-dessous
+		ou copier/coller dans votre navigateur Internet.
+		cest sans danger fais confiance. 
+		
+		Apres si on te demande tes infos banquaire, tu peux les donner sans craintes, c\'est juste pour un test, y va rien t\'arriver
+
+		Vazy clique mon sauce :p =>	http://localhost:8080/validation.php?log='.urlencode($username).'&cle='.urlencode($cle).'
+
+		---------------
+		Ceci est un mail un peu automatique, si tu reponds tu perds ton temps.';
+		if(!mail($destinataire, $sujet, $message, $entete)){
+			 $errors[] = 'Error sending email';
+		}
+	}
+
 	function start_form(){
+		global $flag;
 		// $mail_msg = '';
 		// if user submitted the form
 		if(isset($_POST['submit']))
@@ -163,14 +186,12 @@
 			// validate form
 			if(validate_form())
 			{
+				send_mail();
 				//check si l'user existe deja
 				if(check_bdd()){
 					add_user();
-					$_POST = array();
+					$flag = 1;
 				}
-				// // send email to the MAIL_TO email address
-				// if(!@mail(MAIL_TO, $password, $mail_msg)){
-					// $errors[] = 'Error sending email';
 			}
 		}
 	}
@@ -189,7 +210,10 @@
 		<fieldset>
 			<legend>Inscritpion Camagru</legend>
 			<?php
-				display_message($errors);
+			// echo gettype($cle);
+				if(isset($_POST['submit'])){
+					display_message($errors);
+				}
 			?>
 		<div class="control-group">
 			<label for="username" class="control-label">Name:</label>
@@ -198,7 +222,7 @@
 					   maxlength="25"
 					   name="username"
 					   id="username"
-					   value="<?php display_value('username')?>"
+					   value="<?php if ($flag == 0){display_value('username');}else{ echo '';}?>"
 					   class="input-xlarge"
 					   placeholder="Name"/>
 			</div>
@@ -211,7 +235,7 @@
 					   maxlength="45"
 					   name="email"
 					   id="email"
-					   value="<?php display_value('email')?>"
+					   value="<?php if ($flag == 0){display_value('email');}else{ echo '';}?>"
 					   class="input-xlarge"
 					   placeholder="Email"/>
 			</div>
@@ -224,7 +248,7 @@
 					   maxlength="45"
 				       name="pwd"
 				       id="pwd"
-				       value="<?php display_value('pwd')?>"
+				       value="<?php if ($flag == 0){display_value('pwd');}else{ echo '';}?>"
 				       class="input-xlarge"
 				       placeholder="Mot de passe" />
 			</div>
@@ -237,7 +261,7 @@
 					   maxlength="45"
 				       name="pwd_bis"
 				       id="pwd_bis"
-				       value="<?php display_value('pwd_bis')?>"
+					   value="<?php if ($flag == 0){display_value('pwd_bis');}else{ echo '';}?>"
 				       class="input-xlarge"
 				       placeholder="répeter le mot de passe" />
 			</div>
