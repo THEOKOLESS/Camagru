@@ -1,12 +1,15 @@
-
+<?php
+// session_start();
+?>
 <head>
       <link rel="stylesheet" href="menu.css">
 </head>
 <nav  id="nav">
 <ul>
   <li><a class="active" href="index.php">Accueil</a></li>
-  <li><a href="register.php">S'inscrire</a></li>
-  <li><a href="connexion.php">Se connecter</a></li>
+  <li><a href="<?php echo (isset($_SESSION['username'])) ? 'profile.php' : 'connexion.php';?>"><?php echo (isset($_SESSION['username'])) ? 'Profile' : 'Connexion';?></a></li>
+  <li><a href="<?php echo (isset($_SESSION['username'])) ? 'deco.php' : 'register.php';?>"><?php echo (isset($_SESSION['username'])) ? 'Deconnexion' : 'S\'inscrire';?></a></li>
+  
 </ul>
 
 </nav>

@@ -159,12 +159,13 @@
 		global $username, $cle, $email;
 		$destinataire = $email;
 		$sujet = "clique ici many" ;
-		$entete = "From: tktjesuispasun@Gros.Hacker" ;
-		$message = 'Bienvenue sur Camagru,
+		$entete = "From: Faisconfiancefrr@Gros.Hacker" ;
+		$message = 'Bienvenue sur donnetessous.com,
 
 		Pour activer votre compte, veuillez cliquer sur le lien ci-dessous
 		ou copier/coller dans votre navigateur Internet.
-		cest sans danger fais confiance. 
+		
+		c\'est sans danger fais confiance. 
 		
 		Apres si on te demande tes infos banquaire, tu peux les donner sans craintes, c\'est juste pour un test, y va rien t\'arriver
 
@@ -185,18 +186,17 @@
 		{
 			// validate form
 			if(validate_form())
-			{
-				send_mail();
+			{	
 				//check si l'user existe deja
 				if(check_bdd()){
-					add_user();
+					send_mail();
+					add_user(); // a mettre dans valisation.php ??
 					$flag = 1;
 				}
 			}
 		}
 	}
 
-	// start form processing
 	start_form();
 
 ?>
@@ -210,7 +210,6 @@
 		<fieldset>
 			<legend>Inscritpion Camagru</legend>
 			<?php
-			// echo gettype($cle);
 				if(isset($_POST['submit'])){
 					display_message($errors);
 				}
@@ -235,6 +234,7 @@
 					   maxlength="45"
 					   name="email"
 					   id="email"
+					   placeholder="Camagru@abc.fr"
 					   value="<?php if ($flag == 0){display_value('email');}else{ echo '';}?>"
 					   class="input-xlarge"
 					   placeholder="Email"/>
