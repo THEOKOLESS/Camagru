@@ -91,7 +91,7 @@
 		}
 		// validate email
 		if($_POST['email'] != ''){
-			$email = filter_var($_POST['email'],FILTER_SANITIZE_STRING);
+			$email = filter_var($_POST['email'],FILTER_SANITIZE_EMAIL);
 			if(!filter_var($email,FILTER_VALIDATE_EMAIL) || strlen($email > 45)){
 				$errors[] = 'Veuiller rentrer un email valide';
 			}
@@ -202,6 +202,7 @@
 ?>
 <head>
 	<link rel="stylesheet" href="bootstrap.min.css">
+	<link rel="stylesheet" href="menu.css">
 </head>
 <body>
 <?php include("menu.php"); ?>
@@ -209,11 +210,7 @@
 	<form action="register.php" method="POST" class="form-horizontal">
 		<fieldset>
 			<legend>Inscritpion Camagru</legend>
-			<?php
-				if(isset($_POST['submit'])){
-					display_message($errors);
-				}
-			?>
+			<?php include("message.php");?>
 		<div class="control-group">
 			<label for="username" class="control-label">Name:</label>
 			<div class="controls">

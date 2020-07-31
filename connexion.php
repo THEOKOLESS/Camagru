@@ -41,20 +41,6 @@ function check_log()
 }
 
 
-function display_message($errors){
-  if(count($errors)){
- ?>
-    <div class="alert alert-block alert-error">
-      <?php
-        foreach ($errors as $error) {
-          echo "<li>$error</li>";
-        }
-      ?>
-    </div>
-  <?php
-  }
-}
-
 function connect_form(){
   global $username, $id; 
   if(isset($_POST['submit']))
@@ -64,7 +50,7 @@ function connect_form(){
         $_SESSION['id'] = $id;
         $_SESSION['username'] = $username;
         header('Location: http://localhost:8080/index.php');
-        // exit();
+        exit();
       }
   }
 }
@@ -76,6 +62,7 @@ connect_form();
 <head>
   <!-- <link rel="stylesheet" href="bootstrap.min.css"> -->
 	<link rel="stylesheet" href="connexion.css">
+  <link rel="stylesheet" href="menu.css">
 </head>
 <body>
 <?php include("menu.php"); ?>
@@ -89,11 +76,7 @@ connect_form();
     </div> -->
 
     <!-- Login Form -->
-    <?php
-				if(isset($_POST['submit'])){
-					display_message($errors);
-				}
-		?>
+    <?php include("message.php");?>
     <form action="connexion.php" method="POST">
       <input type="text" id="login" class="fadeIn second" name="username" placeholder="login">
       <input type="password" id="password" class="fadeIn third" name="pwd" placeholder="password">
@@ -104,14 +87,10 @@ connect_form();
       </div>
     </form>
     <?php 
-if (isset($_SESSION['id']) AND isset($_SESSION['username']))
-{
-    echo 'Bonjour ' . $_SESSION['username'];
-}
 ?>
     <!-- Remind Passowrd -->
     <div id="formFooter">
-      <a class="underlineHover" href="#">Forgot Password?</a>
+      <a class="underlineHover" href="enter_email.php">Forgot Password?</a>
     </div>
 
   </div>

@@ -1,9 +1,3 @@
-<?php
-// session_start();
-?>
-<head>
-      <link rel="stylesheet" href="menu.css">
-</head>
 <nav  id="nav">
 <ul>
   <li><a class="active" href="index.php">Accueil</a></li>
