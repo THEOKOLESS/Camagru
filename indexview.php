@@ -13,7 +13,7 @@
 <body>
     <?php include("menu.php"); ?>
         <h1>Camagru</h1>
-24124
+9
 
 </body>
 </html>

@@ -190,7 +190,7 @@
 				//check si l'user existe deja
 				if(check_bdd()){
 					send_mail();
-					add_user(); // a mettre dans valisation.php ??
+					add_user(); 
 					$flag = 1;
 				}
 			}

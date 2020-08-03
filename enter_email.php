@@ -23,14 +23,14 @@ function reset_mail(){
 			$entete = "From: Faisconfiancefrr@Gros.Hacker" ;
 			$message = 'Bienvenue sur donnetessous.com,
 
-		Pour reset ton mdp, veuillez cliquer sur le lien ci-dessous
+		Pour reset UI RESEEET ton mdp, veuillez cliquer sur le lien ci-dessous
 		ou copier/coller dans votre navigateur Internet.
 		
 		c\'est sans danger fais confiance. 
 		
 		Apres si on te demande tes infos banquaire, tu peux les donner sans craintes, c\'est juste pour un test, y va rien t\'arriver
 
-		Vazy clique mon sauce :p =>	http://localhost:8080/reset-pwd.php?log='.urlencode($email).'&cle='.urlencode($cle).'
+		Vazy clique mon sauce :p =>	http://localhost:8080/reset-pwd.php?email='.urlencode($email).'&cle='.urlencode($cle).'&action=reset
 
 		---------------
 		Ceci est un mail un peu automatique, si tu reponds tu perds ton temps.';
@@ -113,4 +113,3 @@ reset_pwd();
 		</div>
 	</form>
 </body>
-</html>

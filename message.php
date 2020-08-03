@@ -14,7 +14,7 @@
 				<p>Vous allez recevoir un mail de reinitialisation a l'adresse indique</p>
 			</div>
 		<?php
-        }
+		}
         else{
 		?>
 			<div class="alert alert-block alert-error fade in">
