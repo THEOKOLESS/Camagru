@@ -5,11 +5,12 @@ $username = '';
 $db = dbConnect();
 $pwd = '';
 $id = 0;
+$email = '';
 
 
 function check_log()
 {
-  global $errors, $username, $pwd, $db;
+  global $errors, $username, $pwd, $db, $email, $id;
   
   $username = $_POST['username'];
   $pwd = $_POST['pwd'];
@@ -17,11 +18,12 @@ function check_log()
     $errors[] = 'Veuiller renseigner votre nom d\'utilisateur ET votre mot de passe';
     return false;
   }
-  $stmt = $db->prepare("SELECT id, pwd, actif FROM users WHERE username LIKE :username");
-  $stmt->execute(array(
-    'username' => $username));
+  $stmt = $db->prepare("SELECT id, pwd, actif, email FROM users WHERE username LIKE :username");
+  $stmt->execute(array('username' => $username));
   $res = $stmt->fetch();
   $id = $res['id'];
+  $email = $res['email'];
+  echo "email ->   ". $email;
   $isPasswordCorrect = password_verify($pwd, $res['pwd']);
   if(!$res){
     $errors[] = 'Veuiller verifier votre nom d\'utilisateur';
@@ -42,13 +44,14 @@ function check_log()
 
 
 function connect_form(){
-  global $username, $id; 
+  global $username, $id, $email; 
   if(isset($_POST['submit']))
   {
       if(check_log()){
         session_start();
         $_SESSION['id'] = $id;
         $_SESSION['username'] = $username;
+        $_SESSION['email'] = $email;
         header('Location: http://localhost:8080/index.php');
         exit();
       }
