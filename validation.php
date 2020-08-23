@@ -1,3 +1,4 @@
+<?php $title = 'Validation - Camagru'; ?>
 <?php
 require 'config/setup.php';
 // Récupération des variables nécessaires à l'activation
@@ -22,13 +23,16 @@ else // Si ce n'est pas le cas on passe aux comparaisons
 {
    if($cle == $clebdd) // On compare nos deux clés    
      {
-        // Si elles correspondent on active le compte !    
-        echo "Votre compte a bien été activé !";
-
         // La requête qui va passer notre champ actif de 0 à 1
         $stmt = $db->prepare("UPDATE users SET actif = 1 WHERE username LIKE :username ");
         $stmt->bindParam(':username', $username);
         $stmt->execute();
+         // Si elles correspondent on active le compte !    
+         echo "Votre compte a bien été activé !";
+         ?>
+         <p>Felicitation !!</p>
+          <a href="controller/connexion.php">vous pouvez desormais vous connecter</a> 
+  <?php
      }
    else // Si les deux clés sont différentes on provoque une erreur...
      {
@@ -36,4 +40,3 @@ else // Si ce n'est pas le cas on passe aux comparaisons
      }
 }
 ?>
-<a href="index.php">retourner sur le site</a>

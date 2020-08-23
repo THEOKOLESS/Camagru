@@ -1,5 +1,4 @@
-
 <?php
+session_start();
 require 'config/setup.php';
-require 'indexview.php';
-	
+require 'controller/front.php';

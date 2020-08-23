@@ -2,7 +2,7 @@
 	if(isset($_POST['submit'])){
         $actual_link = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
 
-		if(count($errors) === 0 && $actual_link == 'http://localhost:8080/register.php'){
+		if(count($errors) === 0 && $actual_link == 'http://localhost:8888/register.php'){
 		?>
 			<div class="alert alert-success">
 				<p>Vous allez recevoir un mail de confirmation a l'adresse indique</p>

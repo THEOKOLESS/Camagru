@@ -63,9 +63,7 @@ connect_form();
 
 
 <head>
-  <!-- <link rel="stylesheet" href="bootstrap.min.css"> -->
-	<link rel="stylesheet" href="connexion.css">
-  <link rel="stylesheet" href="menu.css">
+	<link rel="stylesheet" href="public/connexion.css">
 </head>
 <body>
 <?php include("menu.php"); ?>
