@@ -2,6 +2,6 @@
 <?php ob_start(); ?>
    
         <h1>Camagru</h1>
-            3
+            46
 <?php $content = ob_get_clean(); ?>
-<?php require('template.php'); ?>
+<?php require('view/template.php'); ?>

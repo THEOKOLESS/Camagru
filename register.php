@@ -1,6 +1,11 @@
 <?php
 
+	// require('config/database.php');
+	// require('model/Dbco.php');
 	require('config/setup.php');
+
+
+	echo $DB_DSN;
 	$errors = array();
 	$flag = 0; // clear form ou pas
 
@@ -38,13 +43,13 @@
 	require('controller/checkregisterform.php');
 	require('controller/send_mail.php');
 	
-	function start_form(){
+	function start_form($DB_DSN, $DB_USER, $DB_PASSWORD, $pdoOptions){
 		global $flag, $errors;
 		$username = isset($_POST['username']) ? $_POST['username'] : NULL;
 		$email = isset($_POST['email']) ? $_POST['email'] : NULL;
 		$pwd = isset($_POST['pwd']) ? $_POST['pwd'] : NULL;
 		$pwd_bis = isset($_POST['pwd_bis']) ? $_POST['pwd_bis'] : NULL;;
-		$db = dbConnect();
+		$db = dbConnect($DB_DSN, $DB_USER, $DB_PASSWORD, $pdoOptions);
 		$cle = md5(microtime(TRUE)*100000);
 		if(isset($_POST['submit']))
 		{
@@ -60,6 +65,7 @@
 			}
 		}
 	}
-	start_form();
+	start_form($DB_DSN, $DB_USER, $DB_PASSWORD, $pdoOptions);
 ?>
+
 <?php require('view/registerview.php')?>

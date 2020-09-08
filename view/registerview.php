@@ -8,7 +8,7 @@ $title = 'Insctription - Camagru'; ?>
 	<link rel="stylesheet" href="public/bootstrap.min.css">
 </head>
 <div class="container">
-	<form action="register.php?ok=2" method="POST" class="form-horizontal">
+	<form action="register.php" method="POST" class="form-horizontal">
 		<fieldset>
 			<legend>Inscritpion Camagru</legend>
 			<?php include("message.php");?>
