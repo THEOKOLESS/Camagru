@@ -19,7 +19,7 @@ $title = 'Insctription - Camagru'; ?>
 					   maxlength="25"
 					   name="username"
 					   id="username"
-					   value="<?php display_value(count($errors)  ? 'username' : '');?>"
+					   value="<?php display_value(count($errors) > 0  ? 'username' : '');?>"
 					   class="input-xlarge"
 					   placeholder="Name"/>
 			</div>
@@ -33,12 +33,12 @@ $title = 'Insctription - Camagru'; ?>
 					   name="email"
 					   id="email"
 					   placeholder="Camagru@abc.fr"
-					   value="<?php display_value(count($errors) ? 'email' : '');?>"
+					   value="<?php display_value(count($errors) > 0 ? 'email' : '');?>"
 					   class="input-xlarge"
 					   placeholder="Email"/>
 			</div>
 		</div>
-
+	<?php echo gettype($errors);?>
 		<div class="control-group">
 			<label for="pwd" class="control-label">Mot de passe:</label>
 			<div class="controls">

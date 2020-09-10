@@ -12,18 +12,6 @@ try{
 
 function home(){
     require('controller/front.php');
-    if ($handle = opendir('.')) {
-
-      while (false !== ($entry = readdir($handle))) {
-  
-          if ($entry != "." && $entry != "..") {
-  
-              echo "$entry\n";
-          }
-      }
-  
-      closedir($handle);
-  }
 }
 
 function register($DB_DSN, $DB_USER, $DB_PASSWORD, $pdoOptions){

@@ -1,7 +1,4 @@
 <?php
-	$errors = array();
-	$flag = 0; // clear form ou pas
-
 	function check_bdd(&$errors, $username, $email, $db)
 	{	
 		$reponse = $db->query('SELECT username, email FROM users');
@@ -62,7 +59,9 @@
 		}
 	
 	}
-	$errors=start_form($DB_DSN, $DB_USER, $DB_PASSWORD, $pdoOptions);
+echo "salut";
+	$errors = start_form($DB_DSN, $DB_USER, $DB_PASSWORD, $pdoOptions);
+	echo "coucou";
 ?>
 
 <?php require('view/registerview.php')?>
