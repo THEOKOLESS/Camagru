@@ -11,18 +11,18 @@
         
     <body>
     <?php
-//     if ($handle = opendir('.')) {
+    //     if ($handle = opendir('.')) {
 
-// while (false !== ($entry = readdir($handle))) {
+    // while (false !== ($entry = readdir($handle))) {
 
-//     if ($entry != "." && $entry != "..") {
+    //     if ($entry != "." && $entry != "..") {
 
-//         echo "$entry\n";
-//     }
-// }
+    //         echo "$entry\n";
+    //     }
+    // }
 
-// closedir($handle);
-// }?>
+    // closedir($handle);
+    // }?>
         <?php include("menu.php"); ?>
         <?= $content ?>
     </body>

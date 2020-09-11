@@ -12,7 +12,7 @@ c\'est sans danger fais confiance.
 
 Apres si on te demande tes infos banquaire, tu peux les donner sans craintes, c\'est juste pour un test, y va rien t\'arriver
 
-Vazy clique mon sauce :p =>	http://localhost:8080/validation.php?log='.urlencode($username).'&cle='.urlencode($cle).'
+Vazy clique mon sauce :p =>	http://localhost:8080/validation?log='.urlencode($username).'&cle='.urlencode($cle).'
 
 ---------------
 Ceci est un mail un peu automatique, si tu reponds tu perds ton temps.';

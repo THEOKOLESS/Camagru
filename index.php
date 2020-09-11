@@ -14,23 +14,44 @@ function home(){
     require('controller/front.php');
 }
 
-function register($DB_DSN, $DB_USER, $DB_PASSWORD, $pdoOptions){
-    require('controller/register.php');
+function register($db, $request){
+    require('controller/Register/register.php');
 }
 
-function contact_us(){
-   require('connexion.php');
+function connexion($db, $request){
+   require('controller/connexion.php');
+}
+
+function validation($db){
+    require('model/validation.php');
+ }
+
+function profile($db){
+    require('profile.php');
 }
 
 function page404(){
     die('Page not found. Please try some different url.');
 }
 
-    if($request == '/index.php' or $request == '/')
-        home();
-    else if($request == '/register')
-        register($DB_DSN, $DB_USER, $DB_PASSWORD, $pdoOptions);
-    else if($request == '/connexion.php')
-        contact_us();
-    else
-        page404();
+    switch($request){
+        case '/index.php':
+        case '/':
+            home();
+        break;
+        case '/register':
+            register($db, $request);
+        break;
+        case '/validation':
+            validation($db);
+        break;
+        case '/connexion':
+            connexion($db, $request);
+        break;
+        case '/profile':
+            profile($db);
+        break;
+        default:
+            page404();
+    }
+
