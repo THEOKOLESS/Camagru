@@ -23,7 +23,7 @@
 
     // closedir($handle);
     // }?>
-        <?php include("menu.php"); ?>
+        <?php include("view/menu.php"); ?>
         <?= $content ?>
     </body>
 </html>

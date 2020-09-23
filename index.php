@@ -30,6 +30,14 @@ function profile($db){
     require('profile.php');
 }
 
+function enter_email($db, $request){
+    require('controller/Pass_Recover/enter_email.php');
+}
+
+function reset_pwd($db, $request){
+    require('reset_pwd.php');
+}
+
 function page404(){
     die('Page not found. Please try some different url.');
 }
@@ -50,6 +58,12 @@ function page404(){
         break;
         case '/profile':
             profile($db);
+        break;
+        case '/enter_email':
+            enter_email($db, $request);
+        break;
+        case '/reset_pwd':
+            reset_pwd($db, $request);
         break;
         default:
             page404();

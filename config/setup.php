@@ -1,11 +1,5 @@
 <?php
 require 'database.php';
-// require_once('model/Dbcreate.php');
-
-// $db = new Dbcreation();
-// $db->dbCreate($DB_USER, $DB_PASSWORD, $pdoOptions);
-// $db->tableCreate($DB_DSN, $DB_USER, $DB_PASSWORD, $pdoOptions);
-
 
 define( 'DB_NAME', 'camagrubdd' );
 define( 'DB_TABLE', 'users' );

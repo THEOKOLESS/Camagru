@@ -26,7 +26,7 @@
     </form>
     <!-- Remind Passowrd -->
     <div id="formFooter">
-      <a class="underlineHover" href="enter_email.php">Forgot Password?</a>
+      <a class="underlineHover" href="enter_email">Mot de passe oublié ?</a>
     </div>
   </div>
 </div>

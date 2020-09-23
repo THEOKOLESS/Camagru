@@ -1,7 +1,6 @@
 
 <?php 
-// require('/model/register.php');
-$title = 'Insctription - Camagru'; ?>
+$title = 'Insctription'; ?>
 <?php ob_start(); ?>
 
 <head>
