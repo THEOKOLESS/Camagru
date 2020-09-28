@@ -1,5 +1,6 @@
 <?php 
-	if(isset($_POST['submit'])){
+  
+	if(isset($_POST['submit']) || isset($_POST["action"])){
 		if(count($errors) === 0 && $request == '/register'){
 		?>
 			<div class="alert alert-success">
@@ -16,6 +17,13 @@
 			header('Location: http://localhost:8080/');
         	exit();
 		}
+		else if (count($errors) === 0 && $request == '/edit_profile'){
+			?>
+			<div class="alert alert-success">
+				<p>Vos modifications ont bien été enregistrée</p>
+			</div>
+		<?php
+		}
 		else if(count($errors) === 0 && $request == '/reset_pwd'){
 			?>
 				<div class="alert alert-success">
@@ -23,7 +31,7 @@
 				</div>
 				<h2>ENCORE BRAVO</h2>
 				<p>tous s'est bien passé :')</p>
-				<p><a href="connexion.php">
+				<p><a href="connexion">
 				Click maggle</a> pour le tester !</p>
 			<?php
 		}

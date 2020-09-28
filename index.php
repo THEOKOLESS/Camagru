@@ -11,7 +11,7 @@ try{
 }
 
 function home(){
-    require('controller/front.php');
+    require('view/index_view.php');
 }
 
 function register($db, $request){
@@ -27,7 +27,7 @@ function validation($db){
  }
 
 function profile($db){
-    require('profile.php');
+    require('controller/profile.php');
 }
 
 function enter_email($db, $request){
@@ -35,7 +35,11 @@ function enter_email($db, $request){
 }
 
 function reset_pwd($db, $request){
-    require('reset_pwd.php');
+    require('controller/reset_pwd.php');
+}
+
+function edit_profile($db, $request){
+    require('edit_profile.php');
 }
 
 function page404(){
@@ -64,6 +68,9 @@ function page404(){
         break;
         case '/reset_pwd':
             reset_pwd($db, $request);
+        break;
+        case '/edit_profile':
+            edit_profile($db, $request);
         break;
         default:
             page404();

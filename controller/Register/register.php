@@ -1,15 +1,26 @@
 <?php
 
 	require('model/add_register.php');
-	require('controller/Register/check_register_form.php');
 	require('controller/Register/send_register_mail.php');
+	require('public/tools.php');
+
+	function validate_form(&$errors, $username, $email, $pwd, $pwd_bis){
+		check_username($errors, $username);
+		check_email($errors, $email);   
+		check_password($pwd, $errors, $pwd_bis);
+		if(count($errors)){
+			return false;
+		}else{
+			return true;
+		}
+	}
 	
 	function start_form($db){
 		$errors = array();
-		$username = isset($_POST['username']) ? $_POST['username'] : NULL;
-		$email = isset($_POST['email']) ? $_POST['email'] : NULL;
-		$pwd = isset($_POST['pwd']) ? $_POST['pwd'] : NULL;
-		$pwd_bis = isset($_POST['pwd_bis']) ? $_POST['pwd_bis'] : NULL;;
+		$username = init_value('username');
+		$email = init_value('email');
+		$pwd = init_value('pwd');
+		$pwd_bis = init_value('pwd_bis');
 		$cle = md5(microtime(TRUE)*100000);
 		if(isset($_POST['submit']))
 		{
