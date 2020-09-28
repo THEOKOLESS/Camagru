@@ -3,17 +3,19 @@
 require('public/tools.php');
 require('model/model_tools.php');
 
-function validate_form(&$errors, $username, $email, $pwd, $new_pwd, $new_pwd_bis, $db){
+function validate_form(&$errors, $username, $email, $pwd, $new_pwd, $new_pwd_bis, $res){
 
             check_username($errors, $username);
             check_email($errors, $email);
-            $res = get_user_info_from_username($db, $username);
-            if (!password_verify($pwd, $res['pwd']))          
-            {
-                $errors[] = 'MDP faux !';
-                return false;
+            if($pwd != '' || $new_pwd != '' || $new_pwd_bis != ''){
+               
+                if (!password_verify($pwd, $res['pwd']))          
+                {
+                    $errors[] = 'MDP faux !';
+                    return false;
+                }
+                check_password($new_pwd, $errors, $new_pwd_bis);
             }
-        check_password($new_pwd, $errors, $new_pwd_bis);
     if(count($errors)){
         return false;
     }else{
@@ -21,11 +23,9 @@ function validate_form(&$errors, $username, $email, $pwd, $new_pwd, $new_pwd_bis
     }
 }
 
-// function update_bdd(){
-//     if ($_SESSION['username'] != $_POST['username']){
-        
-//     }
-// }
+function update_bdd($db, $username, $res){
+    $res = update_username_from_username($db, $username, $res);
+}
 
 function updated_form(){
     if ($_SESSION['username'] != $_POST['username'] || $_SESSION['email'] != $_POST['email'] 
@@ -45,9 +45,10 @@ function start_form($db){
     {
         if (updated_form())
         {
-            if (validate_form($errors, $username, $email, $pwd, $new_pwd, $new_pwd_bis, $db))
-                // update_bdd();
-                echo "coucou";
+            $res = get_user_info_from_username($db, $username);
+           
+            if (validate_form($errors, $username, $email, $pwd, $new_pwd, $new_pwd_bis, $res))
+                update_bdd($db, $username, $res);        
         }
         else{
             $errors[] = "vous n'avez rien modifié...";
