@@ -13,7 +13,7 @@ function check_form($db, $request){
         $email = init_value('email');
         check_password($pwd, $errors, $pwd_bis);
         if (count($errors) === 0){
-            change_pwd($db, $pwd, $email);
+            recover_pwd($db, $pwd, $email);
             include('view/message.php');
         }
         else{        

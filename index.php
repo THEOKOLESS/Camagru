@@ -39,7 +39,7 @@ function reset_pwd($db, $request){
 }
 
 function edit_profile($db, $request){
-    require('edit_profile.php');
+    require('controller/edit_profile.php');
 }
 
 function page404(){
