@@ -42,6 +42,10 @@ function edit_profile($db, $request){
     require('controller/edit_profile.php');
 }
 
+function montage($db){
+        require('montage.php');
+}
+
 function page404(){
     die('Page not found. Please try some different url.');
 }
@@ -71,6 +75,9 @@ function page404(){
         break;
         case '/edit_profile':
             edit_profile($db, $request);
+        break;
+        case '/montage':
+            montage($db);
         break;
         default:
             page404();
