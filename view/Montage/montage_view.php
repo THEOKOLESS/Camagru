@@ -10,21 +10,23 @@
     </h1>
     <div class="camera">
         <video id="video">Video stream not available.</video>
-        <img id="main" src="" class="hide">
+        <img id="cat1" src="public/img/cat1.png" class="hide">
+        <img id="cat2" src="public/img/cat2.png" class="hide">
+        <img id="cat3" src="public/img/cat3.png" class="hide">
     </div>
     <div>
        
     </div>
     <canvas id="canvas">  Désolé, votre navigateur ne prend pas en charge &lt;canvas&gt;.</canvas>
-    <button id="startbutton">Prendre une photo</button>
+    <button id="startbutton"  type="test" name="test">Prendre une photo</button>
+    <input id="startbutton"  type="test" name="test" value="Prendre une photo">
     <div class="output">
-        <img id="photo" src="" class="hide"> 
-       
+        <img id="photo" src="" class="hide">     
     </div>
     <div id="picContainer">
-        <img id="arryImages" src="public/img/cat1.png" class="thumb">
-        <img id="arryImages" src="public/img/cat2.png" class="thumb">
-        <img id="arryImages" src="public/img/cat3.png" class="thumb">
+        <img src="public/img/cat1.png" class="thumb">
+        <img src="public/img/cat2.png" class="thumb">
+        <img src="public/img/cat3.png" class="thumb">
     </div>
      
 </div>
