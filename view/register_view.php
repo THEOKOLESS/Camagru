@@ -6,7 +6,7 @@ $title = 'Insctription'; ?>
 <head>
 	<link rel="stylesheet" href="public/bootstrap.min.css">
 </head>
-<div class="container">
+
 	<form action="register" method="POST" class="form-horizontal">
 		<fieldset>
 			<legend>Inscritpion Camagru</legend>
@@ -69,6 +69,5 @@ $title = 'Insctription'; ?>
 		</div>
 		</fieldset>
 	</form>
-</div>
 <?php $content = ob_get_clean(); ?>
 <?php require('template.php'); ?>
