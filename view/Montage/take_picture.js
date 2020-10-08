@@ -23,9 +23,9 @@
 //       function(stream) {
 //         if (navigator.mozGetUserMedia) {
 //           video.mozSrcObject = stream;
+//           console.log("MOZILLA");
 //         } else {
-//           var vendorURL = window.URL || window.webkitURL;
-//           video.src = vendorURL.createObjectURL(stream);
+//           video.srcObject = stream;
 //         }
 //         video.play();
 //       },
@@ -51,6 +51,8 @@
 //       canvas.getContext('2d').drawImage(video, 0, 0, width, height);
 //       var data = canvas.toDataURL('image/png');
 //       photo.setAttribute('src', data);
+//       console.log(photo.src);
+//       window.location.href="montage?photo_src=" + photo.src;
 //     }
   
 //     startbutton.addEventListener('click', function(ev){
@@ -59,7 +61,6 @@
 //     }, false);
   
 //   })();
-  
 (function() {
 
   var width = 320; // We will scale the photo width to this
@@ -77,10 +78,13 @@
       canvas = document.getElementById('canvas');
       photo = document.getElementById('photo');
       startbutton = document.getElementById('startbutton');
+      photo_test = document.getElementById('photo_test');
 
       navigator.mediaDevices.getUserMedia({
-              video: true,
-              audio: false
+            
+        video:/*{ width: 1280, height: 720 }*/true,
+          audio: false
+             
           })
           .then(function(stream) {
               video.srcObject = stream;
@@ -95,7 +99,7 @@
       video.addEventListener('canplay', function(ev) {
           if (!streaming) {
               height = video.videoHeight / (video.videoWidth / width);
-
+        
               if (isNaN(height)) {
                   height = width / (4 / 3);
               }
@@ -112,39 +116,45 @@
           takepicture();
           ev.preventDefault();
       }, false);
-
-      clearphoto();
-  }
-
-
-  function clearphoto() {
-      var context = canvas.getContext('2d');
-      context.fillStyle = "#AAA";
-      context.fillRect(0, 0, canvas.width, canvas.height);
-
-      var data = canvas.toDataURL('image/png');
-      photo.setAttribute('src', data);
   }
 
   function takepicture() {
       var context = canvas.getContext('2d');
-      if (width && height) {
-          
+     
+        console.log(height);
+        console.log(width);
           canvas.width = width;
           canvas.height = height;
           context.drawImage(video, 0, 0, width, height);
 
-          var data = canvas.toDataURL('image/png');
-          photo.setAttribute('src', data);
-          photo.classList.remove('hide');  
-
-          console.log(photo.src);
+          var data = canvas.toDataURL("image/​png");
+      
+          // cross browser cruft
+        var get_URL = function () {
+            return window.URL || window.webkitURL || window;
+        };
+        dataUriToBlob(data);
+        var blob = dataUriToBlob(data);
+        var url = get_URL().createObjectURL(blob);
+        // photo_test.setAttribute('src', data);
+        console.log(url);
+        photo.setAttribute('src', url);
+        photo.classList.remove('hide'); 
         //   document.cookie="photo_src=" + photo.src;
-        //   window.location.href="montage?photo_src=" + photo.src;
-      } else {
-          clearphoto();
-      }
+          window.location.href="montage?photo_src=" + photo.src;
   }
-
+// converts a dataURI to a Blob
+function dataUriToBlob(dataURI) {
+    var byteString = atob(dataURI.split(',')[1]);
+    var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
+    var arrayBuffer = new ArrayBuffer(byteString.length);
+    var _ia = new Uint8Array(arrayBuffer);
+    for (var i = 0; i < byteString.length; i++) {
+        _ia[i] = byteString.charCodeAt(i);
+    }
+    var dataView = new DataView(arrayBuffer);
+    var blob = new Blob([dataView], { type: mimeString });
+    return blob;
+}
   window.addEventListener('load', startup, false);
 })();   
