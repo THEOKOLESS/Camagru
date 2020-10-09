@@ -123,38 +123,68 @@
      
         console.log(height);
         console.log(width);
-          canvas.width = width;
-          canvas.height = height;
-          context.drawImage(video, 0, 0, width, height);
+        canvas.width = width;
+        canvas.height = height;
+        context.drawImage(video, 0, 0, width, height);
 
           var data = canvas.toDataURL("image/​png");
       
           // cross browser cruft
-        var get_URL = function () {
-            return window.URL || window.webkitURL || window;
-        };
-        dataUriToBlob(data);
-        var blob = dataUriToBlob(data);
-        var url = get_URL().createObjectURL(blob);
+        // var get_URL = function () {
+        //     return window.URL || window.webkitURL || window;
+        // };
+        // var blob = dataUriToBlob(data);
+
+        // var url = get_URL().createObjectURL(blob);
         // photo_test.setAttribute('src', data);
-        console.log(url);
-        photo.setAttribute('src', url);
-        photo.classList.remove('hide'); 
+        // let photo_input = document.getElementById("photo_input").files[0];
+        // let formData = new FormData();
+        // formData.append("photo", photo_input);
+        // fetch('/upload/image', {method: "POST", body: formData})
+        // .then(response => console.log(response))
+        // .catch(error => console.log(error));
+
+        var photo_test = document.getElementById('photo_test');
+
+        photo.setAttribute('src', data);
+    
+        // console.log(typeof data);
+        photo.classList.remove('hide');
+        photo_test.setAttribute('value', data);
+        // console.log(url);
         //   document.cookie="photo_src=" + photo.src;
-          window.location.href="montage?photo_src=" + photo.src;
+          // window.location.href="montage?photo_src=" + photo.src;
   }
 // converts a dataURI to a Blob
-function dataUriToBlob(dataURI) {
-    var byteString = atob(dataURI.split(',')[1]);
-    var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
-    var arrayBuffer = new ArrayBuffer(byteString.length);
-    var _ia = new Uint8Array(arrayBuffer);
-    for (var i = 0; i < byteString.length; i++) {
-        _ia[i] = byteString.charCodeAt(i);
-    }
-    var dataView = new DataView(arrayBuffer);
-    var blob = new Blob([dataView], { type: mimeString });
-    return blob;
-}
+// function dataUriToBlob(dataURI) {
+//     var byteString = atob(dataURI.split(',')[1]);
+//     var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
+//     var arrayBuffer = new ArrayBuffer(byteString.length);
+//     var _ia = new Uint8Array(arrayBuffer);
+//     for (var i = 0; i < byteString.length; i++) {
+//         _ia[i] = byteString.charCodeAt(i);
+//     }
+//     var dataView = new DataView(arrayBuffer);
+//     var blob = new Blob([dataView], { type: mimeString });
+//     return blob;
+// }
   window.addEventListener('load', startup, false);
 })();   
+
+// async function SavePhoto(inp) 
+// {
+//     let user = { name:'john', age:34 };
+//     let formData = new FormData();
+//     let photo = inp.files[0];      
+         
+//     formData.append("photo", photo);
+//     formData.append("user", JSON.stringify(user));  
+    
+//     try {
+//        let r = await fetch('/upload/image', {method: "POST", body: formData}); 
+//        console.log('HTTP response code:',r.status); 
+//     } catch(e) {
+//        console.log('Huston we have problem...:', e);
+//     }
+    
+// }

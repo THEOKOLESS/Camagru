@@ -10,8 +10,8 @@ try{
   echo 'THIS IS  A CAAAAATCH LOL : ' . $e->getMessage();
 }
 
-function home(){
-    require('view/index_view.php');
+function home($db){
+    require('gallerie.php');
 }
 
 function register($db, $request){
@@ -53,7 +53,7 @@ function page404(){
     switch($request){
         case '/index.php':
         case '/':
-            home();
+            home($db);
         break;
         case '/register':
             register($db, $request);

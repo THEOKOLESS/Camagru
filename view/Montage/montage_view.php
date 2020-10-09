@@ -18,23 +18,19 @@
        
     </div>
     <canvas id="canvas">  Désolé, votre navigateur ne prend pas en charge &lt;canvas&gt;.</canvas>
-    <button id="startbutton"  type="test" name="test">Prendre une photo</button>
-    <div class="output">
-        <img id="photo" src="" class="hide">    
-        <img id="photo_test" src="" >   
-    </div>
+    <form action="#" method="POST" name="picture">
+            <input id="startbutton" type="button" value="prendre une photo" />
+            <div class="output">
+                <img id="photo" src="" class="hide"> 
+            </div>
+            <input type="hidden" id="photo_test" name="photo_test" value=""/>
+            <button value="submit" name="submit">accepter la photo</button>
+        </form>
     <div id="picContainer">
         <img src="public/img/cat1.png" class="thumb">
         <img src="public/img/cat2.png" class="thumb">
         <img src="public/img/cat3.png" class="thumb">
     </div>
-
- <label>Vore nom : 
-  <input type="text" id="ajaxTextbox" />
-</label>
-<span id="ajaxButton" style="cursor: pointer; text-decoration: underline">
-  Lancer une requête
-</span>
 
 </div>
    
