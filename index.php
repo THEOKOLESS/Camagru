@@ -11,7 +11,7 @@ try{
 }
 
 function home($db){
-    require('gallerie.php');
+    require('galerie.php');
 }
 
 function register($db, $request){

@@ -5,6 +5,23 @@
     display: block;
 }
 
+.liked:hover {
+    background: url("public/img/like_over.png") no-repeat;
+}
+
+  .thumb {
+    font-size: 50px;
+    cursor: pointer;
+    user-select: none;
+  }
+  
+.box {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-evenly;
+  }
+  
+
 .hide {
     display: none;
 }
