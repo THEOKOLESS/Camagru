@@ -7,6 +7,7 @@
         <?php
     }?>
 </div>
-<script src="view/Galerie/like.js"></script>      
+<script src="view/Galerie/like.js"></script>
+<script src="view/Galerie/com.js"></script>            
 <?php $content = ob_get_clean(); ?>
 <?php require('view/template.php'); ?>
