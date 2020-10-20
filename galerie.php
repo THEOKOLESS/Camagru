@@ -38,7 +38,7 @@
             ?>
                 <div class="pic">
                     <img src=<?php echo $pic;?>>
-                    <div class="box"onclick="showcom(this)">
+                    <div class="box" onclick="showcom(this)">
                         <div>
                                 <?php if (isset($_SESSION['id'])){?>
                                 <input type="hidden" id=<?php echo "id_" . $flag;?> value="<?php echo $img?>"> 
@@ -72,9 +72,9 @@
                         name="com"
                         class="input-xlarge"
                         placeholder="Votre commentaire"/>
-
-                        <button>Poster mon super com</button>
-                        
+                        <input type="button" value="Poster on super com" onclick="post_com(this)" />
+                        <input type="hidden" id=<?php echo "id+" . $flag;?> value="<?php echo $img?>">
+                        <input type="hidden" id=<?php echo "id-" . $flag;?> value="<?php echo $com_nbr?>">
                     </div>
                     <hr>  
                 </div>
