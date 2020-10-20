@@ -4,6 +4,8 @@ require 'database.php';
 define( 'DB_NAME', 'camagrubdd' );
 define( 'DB_TABLE', 'users' );
 define( 'DB_TABLE2', 'photo' );
+define( 'DB_TABLE3', 'likes' );
+define( 'DB_TABLE4', 'coms' );
 
 $db_dsn1 = $DB_DSN;
 $db_user1 = $DB_USER;
@@ -29,13 +31,27 @@ if($db){
         // on creer la table photo et ses champs si elle n'existe pas
         $sql = "CREATE TABLE IF NOT EXISTS `".DB_TABLE2."` (
         id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-        file_pic_path VARCHAR(64) NOT NULL,
-        id_user VARCHAR(255) NOT NULL,
+        file_pic_path VARCHAR(255) NOT NULL,
+        id_user INT(6) NOT NULL,
         like_nbr INT(6) DEFAULT 0,
         com_nbr INT(6) DEFAULT 0,
         reg_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
         )";
         $db->prepare($sql)->execute();
+
+        // on creer la table likes et ses champs si elle n'existe pas
+        $sql = "CREATE TABLE IF NOT EXISTS `".DB_TABLE3."` (
+            file_pic_path VARCHAR(255) NOT NULL,
+            id_user INT(6) NOT NULL
+            )";
+            $db->prepare($sql)->execute();
+
+        // on creer la table coms et ses champs si elle n'existe pas
+        $sql = "CREATE TABLE IF NOT EXISTS `".DB_TABLE4."` (
+                file_pic_path VARCHAR(255) NOT NULL,
+                id_user INT(6) NOT NULL
+                )";
+                $db->prepare($sql)->execute();
     }
 //creation de la bdd si elle n'existe pas
 function dbCreate($DB_USER, $DB_PASSWORD, $pdoOptions){

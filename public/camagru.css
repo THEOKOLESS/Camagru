@@ -104,6 +104,9 @@ input[type="number"]
     cursor: pointer;
 }
 
+.com input[type="number"]{
+    text-align: end;
+}
 .contentarea {
     font-size: 16px;
     font-family: Arial;
