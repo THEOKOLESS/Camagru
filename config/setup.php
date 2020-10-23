@@ -41,6 +41,7 @@ if($db){
 
         // on creer la table likes et ses champs si elle n'existe pas
         $sql = "CREATE TABLE IF NOT EXISTS `".DB_TABLE3."` (
+            id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
             file_pic_path VARCHAR(255) NOT NULL,
             id_user INT(6) NOT NULL
             )";
@@ -48,8 +49,9 @@ if($db){
 
         // on creer la table coms et ses champs si elle n'existe pas
         $sql = "CREATE TABLE IF NOT EXISTS `".DB_TABLE4."` (
-                file_pic_path VARCHAR(255) NOT NULL,
+                id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
                 id_user INT(6) NOT NULL,
+                id_photo INT(6) NOT NULL,
                 com VARCHAR(255) NOT NULL
                 )";
                 $db->prepare($sql)->execute();

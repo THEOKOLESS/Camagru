@@ -27,17 +27,18 @@
     function photo_from_bdd($db)
 	{   	
         $flag = 0;
-        $reponse = $db->query('SELECT file_pic_path, like_nbr, com_nbr FROM photo');
+        $reponse = $db->query('SELECT id, file_pic_path, like_nbr, com_nbr FROM photo');
 		while ($data = $reponse->fetch())
 		{
-            $like_nbr = $data['like_nbr'];
-            $com_nbr = $data['com_nbr'];    
             $img = $data['file_pic_path'];
+            $id_photo = $data['id'];
+            $like_nbr = $data['like_nbr'];  
+            $com =  $db->query("SELECT * FROM photo INNER JOIN coms ON photo.id=coms.id_photo WHERE photo.file_pic_path='".$img."'"); 
             $flag += 1;
             $pic = file_get_contents("upload/image/" . $img . ".txt");
             ?>
                 <div class="pic">
-                    <img src=<?php echo $pic;?>>
+                    <img id="<?php echo "id_photo" . $flag;?>"src=<?php echo $pic;?>>
                     <div class="box" onclick="showcom(this)">
                         <div>
                                 <?php if (isset($_SESSION['id'])){?>
@@ -59,28 +60,40 @@
                                     <?php } ?>
                                 <input type="number" value="<?php echo $like_nbr;?>" readonly>
                         </div>
-                        <div >
+                        <div>
                             <span class="com">
-                                <input type="number" value="<?php echo $com_nbr;?>" readonly > Commentaire(s) :
+                                <input type="number" id="<?php echo "count_com_id" . $flag;?>" value="<?php echo $com->rowCount();?>" readonly > Commentaire(s) :
                                  </span>
                         </div>
                     </div>
                     <div class="hide">
 
-                        <input type="text"
+                        <input id="<?php echo "count_value" . $flag; ?>" type="text"
                         maxlength="200"
                         name="com"
                         class="input-xlarge"
                         placeholder="Votre commentaire"/>
-                        <input type="button" value="Poster on super com" onclick="post_com(this)" />
-                        <input type="hidden" id=<?php echo "id+" . $flag;?> value="<?php echo $img?>">
-                        <input type="hidden" id=<?php echo "id-" . $flag;?> value="<?php echo $com_nbr?>">
+                        <input type="button" value="Poster mon super com"  onclick="post_com(this)" id="<?php echo "id->" . $flag; ?>"  />
+
+                        <div class="coms_container">
+                            <?php 
+                                while($commentary = $com->fetch()){
+                                    ?>
+                                    <div>
+                                    <?php
+                                  echo $commentary['com'];  
+                                  ?>
+                                  </div>
+                                  <?php
+                                }
+                            ?>
+                        </div>
                     </div>
                     <hr>  
                 </div>
             <?php
-            //  update_bdd_like($db, $like_nbr, $img);
-        }	
+        }
+        // var_dump($com_nbr);
         if(!$flag)
             return false;
         return true;

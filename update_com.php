@@ -4,15 +4,16 @@ require 'config/setup.php';
 
     if (isset($_POST['com'])){
         $com = $_POST['com'];
-        $path = $_POST['file_pic_path'];
+        // $path = $_POST['file_pic_path'];
         $com_nbr = $_POST['com_nbr'];
+        $id_photo = $_POST['id_photo'];
         $user_id = $_SESSION['id']; 
-        $test = "la photo ; " . $path ." a ce com : " . $com . "avec l'user id " . $user_id . "c'est son " . $com_nbr . "eme com en fait";
-        $array = ['path' => $path, 'test' => $test];
-        $sql = "UPDATE photo SET com_nbr=? WHERE file_pic_path=?";
+        $test = "la photo ; " . $id_photo ." a ce com : " . $com . "avec l'user id " . $user_id . "c'est son " . $com_nbr . "eme com en fait";
+        $array = ['test' => $test];
+        $sql = "UPDATE photo SET com_nbr=? WHERE id=?";
         $flag = 0;  
 
-        $db->prepare($sql)->execute([$com_nbr, $path]);/* nombre de com sur la photo*/
+        $db->prepare($sql)->execute([$com_nbr, $id_photo]);/* nombre de com sur la photo*/
 
         
         // $reponse = $db->query('SELECT file_pic_path, id_user FROM coms'); /* like en fonction des users */ 
@@ -26,10 +27,10 @@ require 'config/setup.php';
         // }	
 
         if (!$flag){
-            $req = $db->prepare('INSERT INTO coms(file_pic_path, id_user, com) VALUES(:file_pic_path, :id_user, :com)');
+            $req = $db->prepare('INSERT INTO coms(id_user, id_photo, com) VALUES( :id_user, :id_photo, :com)');
             $req->execute(array(
-                'file_pic_path' => $path,
                 'id_user' =>  $user_id,
+                'id_photo' => $id_photo,
                 'com' => $com
             ));
         }

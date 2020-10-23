@@ -11,24 +11,23 @@ function showcom(x){
 }
 
 function post_com(x){
-    let com = x.previousSibling.previousSibling.value;
-    let photo = x.nextSibling.nextSibling.value;
-    let com_counter = x.nextSibling.nextSibling.nextSibling.nextSibling;
-    let com_nbr = parseInt(com_counter.value, 10); 
-   
+    let id_btn = event.target.id.replace(/^\D+/g, "");
+    let id_photo = document.getElementById("id_photo" + id_btn).id.replace(/^\D+/g, "")
+    let elem_com_nbr = document.getElementById("count_com_id" + id_btn)
+    let com_nbr = parseInt(elem_com_nbr.value, 10)
+    let com = document.getElementById("count_value" + id_btn).value;
+
     if (com != ""){
         com_nbr += 1;
-        // console.log(com_nbr);
-        // console.log(com_counter);
-        com_counter.setAttribute('value', com_nbr);
-        console.log("ca pars");
-        makeRequest('update_com.php', com, photo, com_nbr);
+        console.log(id_photo);
+        elem_com_nbr.setAttribute('value', com_nbr);
+        makeRequest('update_com.php', com, id_photo, com_nbr);
     }
     else
         alert("n'envoie pas de com vide wsh")
 }
 
-function makeRequest(url, com, photo, com_nbr) {
+function makeRequest(url, com, id_photo, com_nbr) {
 
     httpRequest = new XMLHttpRequest();
     if (!httpRequest) {
@@ -38,7 +37,7 @@ function makeRequest(url, com, photo, com_nbr) {
     httpRequest.onreadystatechange = ajax;
     httpRequest.open('POST', url);
     httpRequest.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-    httpRequest.send('com=' + encodeURIComponent(com) + '&file_pic_path=' + encodeURIComponent(photo) + '&com_nbr=' + encodeURIComponent(com_nbr)); // like = POST
+    httpRequest.send('com=' + encodeURIComponent(com) + '&id_photo=' + encodeURIComponent(id_photo) + '&com_nbr=' + encodeURIComponent(com_nbr)); // like = POST
   }
 
   function ajax(){

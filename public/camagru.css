@@ -9,6 +9,11 @@
     background: url("public/img/like_over.png") no-repeat;
 }
 
+.coms_container{
+    max-height: 140px;
+    overflow-y: auto;
+}
+
   .thumb {
     font-size: 50px;
     cursor: pointer;
