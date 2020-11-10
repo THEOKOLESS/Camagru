@@ -1,59 +1,61 @@
 
-var httpRequest;
+// var httpRequest;
 
-function showcom(x){
+function showcom(){
 
-    var list = x.nextSibling.nextSibling
+  let id_com = event.target.id;
+  let id = id_com.replace(/^\D+/g, "");
+  var list = document.getElementById("hidden_com" + id);
     if(event.target.classList.contains("com")){
         list.classList.toggle('hide');
     }
- 
+    console.log("ENCULEEE")
 }
 
-function post_com(x){
-    let id_btn = event.target.id.replace(/^\D+/g, "");
+
+function post_com(){
+    let id_btn = event.target.id.replace(/^\D+/g, ""); /*get the id of button  to know where we are*/
     let id_photo = document.getElementById("id_photo" + id_btn).id.replace(/^\D+/g, "")
     let elem_com_nbr = document.getElementById("count_com_id" + id_btn)
-    let com_nbr = parseInt(elem_com_nbr.value, 10)
+    let com_nbr = parseInt(elem_com_nbr.innerHTML, 10)
     let com = document.getElementById("count_value" + id_btn).value;
 
     if (com != ""){
         com_nbr += 1;
-        console.log(id_photo);
-        elem_com_nbr.setAttribute('value', com_nbr);
-        makeRequest('update_com.php', com, id_photo, com_nbr);
+        elem_com_nbr.textContent = com_nbr + " comments";
+        makeRequest_com('update_com.php', com, id_photo);
     }
     else
         alert("n'envoie pas de com vide wsh")
 }
 
-function makeRequest(url, com, id_photo, com_nbr) {
+function makeRequest_com(url, com, id_photo) {
 
     httpRequest = new XMLHttpRequest();
     if (!httpRequest) {
         alert('Abandon :( Impossible de créer une instance de XMLHTTP');
         return false;
       }
-    httpRequest.onreadystatechange = ajax;
+    httpRequest.onreadystatechange = ajax_com;
     httpRequest.open('POST', url);
     httpRequest.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-    httpRequest.send('com=' + encodeURIComponent(com) + '&id_photo=' + encodeURIComponent(id_photo) + '&com_nbr=' + encodeURIComponent(com_nbr)); // like = POST
+    httpRequest.send('com=' + encodeURIComponent(com) + '&id_photo=' + encodeURIComponent(id_photo)); // like = POST
   }
 
-  function ajax(){
+  function ajax_com(){
     try {
         if (httpRequest.readyState === XMLHttpRequest.DONE) {
           if (httpRequest.status === 200) {
-            var response = JSON.parse(httpRequest.responseText);
+            // var response = JSON.parse(httpRequest.responseText);
             // return response.json();
-            alert(response.test); // test in the array
-            console.log('success!');
+            // alert(response.test); // test in the array
+            console.log('com  success!');
           } else {
-            alert("Un problème est survenu au cours de la requête.");
+            alert("A probleme occured during the com request.");
           }
         }
       }
       catch( e ) {
-        alert("Une exception s’est produite : " + e.description);
+        console.log("a com dinguerie happened: " + e.description);
       }
 }

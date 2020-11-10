@@ -1,23 +1,9 @@
 <?php
-    // if (isset($_POST['like'])){
-    //     echo "yo";
-    //     $like = $_POST['like'];
-    //     $array = ['like' => $like];
-    //     echo json_encode($array);
-
-    // }
-    // function update_bdd_like($db, $like, $pic)
-    // {   
-    //     echo "UPDAATE ???  :   " . $like;
-    //     $sql = "UPDATE photo SET like_nbr=? WHERE file_pic_path=?";
-    //     $db->prepare($sql)->execute([$like, $pic]);
-    // }
-
 
     function liked($db, $path, $user_id){
-        $reponse = $db->query('SELECT file_pic_path, id_user FROM likes');
+        $reponse = $db->query('SELECT id_photo, id_user FROM likes');
         while ($donnees = $reponse->fetch()){
-            if($donnees['file_pic_path'] == $path && $donnees['id_user'] == $user_id){
+            if($donnees['id_photo'] == $path && $donnees['id_user'] == $user_id){
                 return true;
             }
         }
@@ -27,73 +13,78 @@
     function photo_from_bdd($db)
 	{   	
         $flag = 0;
-        $reponse = $db->query('SELECT id, file_pic_path, like_nbr, com_nbr FROM photo');
+        $reponse = $db->query('SELECT id, file_pic_path FROM photo');
 		while ($data = $reponse->fetch())
 		{
             $img = $data['file_pic_path'];
             $id_photo = $data['id'];
-            $like_nbr = $data['like_nbr'];  
+            $like = $db->query("SELECT * FROM photo INNER JOIN likes ON photo.id=likes.id_photo WHERE photo.file_pic_path='".$img."'");  
             $com =  $db->query("SELECT * FROM photo INNER JOIN coms ON photo.id=coms.id_photo WHERE photo.file_pic_path='".$img."'"); 
             $flag += 1;
             $pic = file_get_contents("upload/image/" . $img . ".txt");
             ?>
                 <div class="pic">
                     <img id="<?php echo "id_photo" . $flag;?>"src=<?php echo $pic;?>>
-                    <div class="box" onclick="showcom(this)">
+                    <div class="box">
                         <div>
                                 <?php if (isset($_SESSION['id'])){?>
-                                <input type="hidden" id=<?php echo "id_" . $flag;?> value="<?php echo $img?>"> 
+                                <input type="hidden" id=<?php echo "id_" . $flag;?> value="<?php echo $id_photo?>"> 
                                     <?php 
-                                    if (!liked($db, $img, $_SESSION['id'])){ 
+                                    if (!liked($db, $id_photo, $_SESSION['id'])){ 
                             ?>
-                                            <img id="like" onclick="likedornot(this)" src="public/img/no_like.png" class="thumb liked">
+                                            <img id="<?php echo "like" . $flag;?>" onclick="likedornot()" src="public/img/no_like.png" class="thumb liked">
                             <?php 
                                     }else{
                             ?>
-                                            <img id="like" onclick="likedornot(this)" src="public/img/liked.png" class="liked">
+                                            <img id="<?php echo "like" . $flag;?>" onclick="likedornot()" src="public/img/liked.png" class="liked">
                             <?php
                                         }
                                     }
                                     else{
                                         ?>
-                                        <img id="like" onclick="not_log_likedornot()" src="public/img/no_like.png" class="thumb liked">
+                                        <img id="<?php echo "like" . $flag;?>" onclick="not_log()" src="public/img/no_like.png" class="thumb liked">
                                     <?php } ?>
-                                <input type="number" value="<?php echo $like_nbr;?>" readonly>
+                                <span id="<?php echo "like_counter" . $flag;?>"><?php echo $like->rowCount();?></span>
                         </div>
                         <div>
-                            <span class="com">
-                                <input type="number" id="<?php echo "count_com_id" . $flag;?>" value="<?php echo $com->rowCount();?>" readonly > Commentaire(s) :
-                                 </span>
+                            <span class="com" id="<?php echo "count_com_id" . $flag;?>" onclick="showcom()">
+                                <?php echo $com->rowCount() > 0 ? $com->rowCount() . " comments" :  $com->rowCount() . " comment" ;?> 
+                            </span>
                         </div>
                     </div>
-                    <div class="hide">
-
-                        <input id="<?php echo "count_value" . $flag; ?>" type="text"
-                        maxlength="200"
-                        name="com"
-                        class="input-xlarge"
-                        placeholder="Votre commentaire"/>
-                        <input type="button" value="Poster mon super com"  onclick="post_com(this)" id="<?php echo "id->" . $flag; ?>"  />
-
-                        <div class="coms_container">
+                    <div id="<?php echo "hidden_com" . $flag;?>" class="hide">
+                            <input id="<?php echo "count_value" . $flag; ?>" type="text"
+                            maxlength="200"
+                            name="com"
+                            class="input-xlarge"
+                            placeholder="Votre commentaire"/>
+                            <?php if (isset($_SESSION['id'])){?>
+                            <input type="button" value="Poster mon super com"  onclick="post_com()" id="<?php echo "id->" . $flag; ?>"  />
                             <?php 
-                                while($commentary = $com->fetch()){
-                                    ?>
-                                    <div>
-                                    <?php
-                                  echo $commentary['com'];  
-                                  ?>
-                                  </div>
-                                  <?php
-                                }
+                                }else{ 
                             ?>
+                                <input type="button" value="Poster mon super com"  onclick="not_log()" id="<?php echo "id->" . $flag; ?>"  />
+                                <?php 
+                                    }
+                                ?>
+                            <div class="coms_container">
+                                <?php 
+                                    while($commentary = $com->fetch()){
+                                        ?>
+                                    <div>
+                                        <?php
+                                            echo $commentary['com'];  
+                                        ?>
+                                    </div>
+                                    <?php
+                                    }
+                                ?>
+                            </div>
                         </div>
-                    </div>
-                    <hr>  
+                        <hr>  
                 </div>
             <?php
         }
-        // var_dump($com_nbr);
         if(!$flag)
             return false;
         return true;
