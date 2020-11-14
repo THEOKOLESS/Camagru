@@ -7,8 +7,9 @@ require 'config/setup.php';
         $com = $_POST['com'];
         $id_photo = $_POST['id_photo'];
         $user_id = $_SESSION['id']; 
-        $test = "la photo ; " . $id_photo ." a ce com : " . $com . "avec l'user id " . $user_id . "c'est son " . $com_nbr . "eme com en fait";
-        $array = ['test' => $test];
+        $username = $_SESSION['username'];
+
+        $array = ['username' => $username, 'com' => $com, 'id_photo' => $id_photo];
         $flag = 0;    
         // $reponse = $db->query('SELECT file_pic_path, id_user FROM coms'); /* like en fonction des users */ 
         // while ($donnees = $reponse->fetch())

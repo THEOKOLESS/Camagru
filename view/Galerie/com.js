@@ -18,12 +18,14 @@ function post_com(){
     let id_photo = document.getElementById("id_photo" + id_btn).id.replace(/^\D+/g, "")
     let elem_com_nbr = document.getElementById("count_com_id" + id_btn)
     let com_nbr = parseInt(elem_com_nbr.innerHTML, 10)
-    let com = document.getElementById("count_value" + id_btn).value;
+    let com = document.getElementById("count_value" + id_btn);
+    
 
-    if (com != ""){
+    if (com.value != ""){
         com_nbr += 1;
         elem_com_nbr.textContent = com_nbr + " comments";
-        makeRequest_com('update_com.php', com, id_photo);
+        makeRequest_com('update_com.php', com.value, id_photo);
+        com.value = "";
     }
     else
         alert("n'envoie pas de com vide wsh")
@@ -46,10 +48,13 @@ function makeRequest_com(url, com, id_photo) {
     try {
         if (httpRequest.readyState === XMLHttpRequest.DONE) {
           if (httpRequest.status === 200) {
-            // var response = JSON.parse(httpRequest.responseText);
-            // return response.json();
-            // alert(response.test); // test in the array
-            console.log('com  success!');
+            // let id_btn = event.target.id.replace(/^\D+/g, ""); 
+            // console.log(id_btn)
+            var response = JSON.parse(httpRequest.responseText);
+            let com_container = document.getElementById("com_container" + response.id_photo);
+            // test in the array
+            console.log(response.username + " : " + response.com);
+            com_container.innerHTML += response.username + " : " + response.com
           } else {
             alert("A probleme occured during the com request.");
           }

@@ -10,6 +10,21 @@
         return false;
     }
 
+    function name_com($db, $id_user_com, $com){
+        $stmt = $db->prepare("SELECT username FROM users WHERE id LIKE :id");
+        $stmt->execute(['id' => $id_user_com]);
+        $res = $stmt->fetch();
+        ?>
+            <span style="color:#4682B4;">
+        <?php
+        echo $res['username']  . ': ';
+        ?>
+            </span>
+        <?php 
+        echo $com ;
+        // return($big_res);
+    }
+
     function photo_from_bdd($db)
 	{   	
         $flag = 0;
@@ -67,14 +82,16 @@
                                 <?php 
                                     }
                                 ?>
-                            <div class="coms_container">
+                            <div class="coms_container" id="<?php echo "com_container" . $flag; ?>">
                                 <?php 
                                     while($commentary = $com->fetch()){
                                         ?>
                                     <div>
+                                        
                                         <?php
-                                            echo $commentary['com'];  
+                                           name_com($db, $commentary['id_user'], $commentary['com']); 
                                         ?>
+                                
                                     </div>
                                     <?php
                                     }
