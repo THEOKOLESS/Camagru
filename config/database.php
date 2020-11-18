@@ -1,8 +1,14 @@
 <?php
+//bitnami
+// $DB_DSN = 'mysql:dbname=camagrubdd;host=127.0.0.1';
+// $DB_USER = 'root';
+// $DB_PASSWORD = 'rootroot';
 
-$DB_DSN = 'mysql:dbname=camagrubdd;host=127.0.0.1';
+// docker lamp
+$DB_DSN = 'mysql:host=database:3306';
 $DB_USER = 'root';
-$DB_PASSWORD = 'rootroot';
+$DB_PASSWORD = 'tiger';
+
 
 $pdoOptions = array(
     PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,

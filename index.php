@@ -10,6 +10,7 @@ try{
   echo 'THIS IS  A CAAAAATCH LOL : ' . $e->getMessage();
 }
 
+
 function home($db){
     require('galerie.php');
 }

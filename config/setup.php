@@ -7,13 +7,10 @@ define( 'DB_TABLE2', 'photo' );
 define( 'DB_TABLE3', 'likes' );
 define( 'DB_TABLE4', 'coms' );
 
-$db_dsn1 = $DB_DSN;
-$db_user1 = $DB_USER;
-$db_password1 = $DB_PASSWORD;
+$database = $DB_DSN.';'.'dbname=camagrubdd';
 
-
-dbCreate($DB_USER, $DB_PASSWORD, $pdoOptions);
-$db = dbConnect();
+dbCreate( $DB_USER, $DB_PASSWORD, $DB_DSN, $pdoOptions);
+$db = dbConnect($database, $DB_USER, $DB_PASSWORD, $pdoOptions);
 
 if($db){
     // on creer la table users et ses champs si elle n'existe pas
@@ -55,15 +52,14 @@ if($db){
 
     }
 //creation de la bdd si elle n'existe pas
-function dbCreate($DB_USER, $DB_PASSWORD, $pdoOptions){
-        $pdo = new PDO('mysql:host=localhost', $DB_USER, $DB_PASSWORD, $pdoOptions);
+function dbCreate($DB_USER, $DB_PASSWORD, $DB_DSN, $pdoOptions){
+        $pdo = new PDO($DB_DSN, $DB_USER, $DB_PASSWORD, $pdoOptions);
         $requete = "CREATE DATABASE IF NOT EXISTS `".DB_NAME."` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci";
         $pdo->prepare($requete)->execute();
 }
 
-
-function dbConnect(){
-        global $db_dsn1, $db_user1, $db_password1, $pdoOptions;
-        $db = new PDO($db_dsn1, $db_user1, $db_password1, $pdoOptions);
+//connect to camagrubdd
+function dbConnect($database, $DB_USER, $DB_PASSWORD, $pdoOptions){
+        $db = new PDO($database, $DB_USER, $DB_PASSWORD, $pdoOptions);
         return($db);
 }
