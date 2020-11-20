@@ -22,7 +22,6 @@
             </span>
         <?php 
         echo $com ;
-        // return($big_res);
     }
 
     function photo_from_bdd($db)
@@ -108,4 +107,5 @@
     }
   
     require('view/Galerie/galerie_view.php'); 
+    include('pagination.php');
 ?>
