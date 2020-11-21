@@ -1,6 +1,6 @@
 <?php
-
-
+// session_start();
+// echo( $_SESSION['id']);
 // Make the script run only if there is a page number posted to this script
 if(isset($_POST['pn'])){
 	$rpp = preg_replace('#[^0-9]#', '', $_POST['rpp']);
@@ -14,36 +14,38 @@ if(isset($_POST['pn'])){
 	}
 	// Connect to our database here
     require 'config/setup.php';
-    function photo_from_bdd($db, $like, $com, $flag, $data){
-        $img = $data['file_pic_path'];
-        $id_photo = $data['id'];
-        $like = $db->query("SELECT * FROM photo INNER JOIN likes ON photo.id=likes.id_photo WHERE photo.file_pic_path='".$img."'");  
-        $com =  $db->query("SELECT * FROM photo INNER JOIN coms ON photo.id=coms.id_photo WHERE photo.file_pic_path='".$img."'"); 
-        $flag += 1;
-        $pic = file_get_contents("upload/image/" . $img . ".txt");
+    function photo_from_bdd($flag, $pic, $db, $id_photo, $com, $like){
+        echo'   
+                <img id=id_photo' . $flag . ' src=' . $pic .'>
+           
+         '  ;
         ?>
-            <div class="pic">
-                <img id="<?php echo "id_photo" . $flag;?>"src=<?php echo $pic;?>>
                 <div class="box">
                     <div>
-                            <?php if (isset($_SESSION['id'])){?>
-                            <input type="hidden" id=<?php echo "id_" . $flag;?> value="<?php echo $id_photo?>"> 
-                                <?php 
-                                if (!liked($db, $id_photo, $_SESSION['id'])){ 
-                        ?>
-                                        <img id="<?php echo "like" . $flag;?>" onclick="likedornot()" src="public/img/no_like.png" class="thumb liked">
+                        <?php   if(isset($_SESSION['id'])){
+                              echo '2'; 
+                             ?>
+                                    <input type="hidden" id=<?php echo "id_" . $flag;?> value="<?php echo $id_photo?>"> 
                         <?php 
-                                }else{
+                                if(!liked($db, $id_photo, $_SESSION['id'])){
+                                    echo '1'; 
                         ?>
-                                        <img id="<?php echo "like" . $flag;?>" onclick="likedornot()" src="public/img/liked.png" class="liked">
-                        <?php
-                                    }
+                                    <img id="<?php echo "like" . $flag;?>" onclick="likedornot()" src="public/img/no_like.png" class="thumb liked">
+                        <?php 
                                 }
                                 else{
-                                    ?>
-                                    <img id="<?php echo "like" . $flag;?>" onclick="not_log()" src="public/img/no_like.png" class="thumb liked">
-                                <?php } ?>
-                            <span id="<?php echo "like_counter" . $flag;?>"><?php echo $like->rowCount();?></span>
+                                    echo '3'; 
+                        ?>
+                                    <img id="<?php echo "like" . $flag;?>" onclick="likedornot()" src="public/img/liked.png" class="liked">
+                        <?php
+                            }
+                        }
+                        else{
+                            echo '4'; 
+                    ?>
+                            <img id="<?php echo "like" . $flag;?>" onclick="not_log()" src="public/img/no_like.png" class="thumb liked">
+                    <?php } ?>
+                        <span id="<?php echo "like_counter" . $flag;?>"><?php echo $like->rowCount();?></span>
                     </div>
                     <div>
                         <span class="com" id="<?php echo "count_com_id" . $flag;?>" onclick="showcom()">
@@ -51,40 +53,8 @@ if(isset($_POST['pn'])){
                         </span>
                     </div>
                 </div>
-                <div id="<?php echo "hidden_com" . $flag;?>" class="hide">
-                        <input id="<?php echo "count_value" . $flag; ?>" type="text"
-                        maxlength="200"
-                        name="com"
-                        class="input-xlarge"
-                        placeholder="Votre commentaire"/>
-                        <?php if (isset($_SESSION['id'])){?>
-                        <input type="button" value="Poster mon super com"  onclick="post_com()" id="<?php echo "id->" . $flag; ?>"  />
-                        <?php 
-                            }else{ 
-                        ?>
-                            <input type="button" value="Poster mon super com"  onclick="not_log()" id="<?php echo "id->" . $flag; ?>"  />
-                            <?php 
-                                }
-                            ?>
-                        <div class="coms_container" id="<?php echo "com_container" . $flag; ?>">
-                            <?php 
-                                while($commentary = $com->fetch()){
-                                    ?>
-                                <div>
-                                    
-                                    <?php
-                                       name_com($db, $commentary['id_user'], $commentary['com']); 
-                                    ?>
-                            
-                                </div>
-                                <?php
-                                }
-                            ?>
-                        </div>
-                    </div>
-                    <hr>  
-            </div>
         <?php
+         echo '</b><hr>'.'||';
 
     }
 	// This sets the range of rows to query for the chosen $pn
@@ -101,8 +71,8 @@ if(isset($_POST['pn'])){
         $com =  $db->query("SELECT * FROM photo INNER JOIN coms ON photo.id=coms.id_photo WHERE photo.file_pic_path='".$img."'"); 
         $flag += 1;
         $pic = file_get_contents("upload/image/" . $img . ".txt"); 
-        $dataString .=  '<img id=' . 'id_photo' . $flag . ' src=' . $pic . '> ' . '||';
-        //  $dataString .= photo_from_bdd($db, $like, $com, $flag, $data);
+        // $dataString .=  '<img id=' . 'id_photo' . $flag . ' src=' . $pic . '> ' . '||';
+         $dataString .= photo_from_bdd($flag, $pic, $db, $id_photo, $com, $like);
     
 	}
 	// Close your database connection

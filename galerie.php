@@ -97,7 +97,7 @@
                                 ?>
                             </div>
                         </div>
-                        <hr>  
+                        <!-- <hr>   -->
                 </div>
             <?php
         }
@@ -106,6 +106,7 @@
         return true;
     }
   
-    require('view/Galerie/galerie_view.php'); 
+   
     include('pagination.php');
+    require('view/Galerie/galerie_view.php'); 
 ?>

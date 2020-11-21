@@ -12,7 +12,7 @@ try{
 
 
 function home($db){
-    require('galerie.php');
+    require('pagination.php');
 }
 
 function register($db, $request){

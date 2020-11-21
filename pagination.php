@@ -6,13 +6,13 @@
     if($last < 1){
         $last = 1;
     }
-    echo $last;
 ?>
+
 <!DOCTYPE html>
 <html>
 <head>
 <script>
-var rpp = <?php echo $rpp; ?>; // results per page
+var rpp = <?php echo $rpp; ?>; // results per page // get THIS IN A JS FILE to have the userID
 var last = <?php echo $last; ?>; // last page number
 function request_page(pn){
 	var results_box = document.getElementById("results_box");
@@ -26,10 +26,10 @@ function request_page(pn){
 			var dataArray = hr.responseText.split("||");
 			var html_output = "";
 		    for(i = 0; i < dataArray.length - 1; i++){
-				var itemArray = dataArray[i]
-				html_output += itemArray+ "</b><hr>";
+				var itemArray = '<div class="pic">' + dataArray[i] + '</div>' + <?php echo $_SESSION['id']; ?>;;
+                html_output += itemArray;
 			}
-			results_box.innerHTML = html_output;
+			results_box.innerHTML = html_output ;
 	    }
     }
     hr.send("rpp="+rpp+"&last="+last+"&pn="+pn);
@@ -48,10 +48,7 @@ function request_page(pn){
 	pagination_controls.innerHTML = paginationCtrls;
 }
 </script>
-</head>
-<body>
-<div id="pagination_controls"></div>
-<div id="results_box"></div>
-<script> request_page(1); </script>
-</body>
-</html>
+
+<?php 
+
+require('view/Galerie/galerie_view.php'); ?>    
