@@ -80,6 +80,11 @@
       startbutton = document.getElementById('startbutton');
       photo_test = document.getElementById('photo_test');
 
+      upload = document.getElementById('upload');
+      not_available = document.getElementById('not_available');
+      accept_btn = document.getElementById('accept_btn');
+      btn_upload = document.getElementById('btn_upload');
+
       navigator.mediaDevices.getUserMedia({
             
         video:/*{ width: 1280, height: 720 }*/true,
@@ -92,7 +97,11 @@
           })
           .catch(function(err) {
               if (String(err).substring(0,15) == "NotAllowedError")
-                alert("veuillez autoriser l'acces à la cam (wsh)");
+                alert("We can't access your webcam so you are allow to upload a picture of you, but only of you ;)");
+                video.classList.toggle('hide');
+                not_available.classList.toggle('hide');
+                startbutton.classList.toggle('hide');
+                upload.classList.toggle('hide');
               console.log("An error occurred: " + err);
           });
 
@@ -114,9 +123,50 @@
 
       startbutton.addEventListener('click', function(ev) {
           takepicture();
+          accept_btn.classList.remove('hide');
           ev.preventDefault();
       }, false);
+
+      btn_upload.addEventListener('click', function(ev) {
+       
+        // ev.preventDefault();
+        // let data = new FormData(this);
+        // makeRequest_upload('ajaxupload.php');
+        // accept_btn.classList.remove('hide');
+     
+    }, false);
   }
+
+
+  function makeRequest_upload(url) {
+    httpRequest = new XMLHttpRequest();
+    if (!httpRequest) {
+        alert('Abandon :( Impossible de créer une instance de XMLHTTP');
+        return false;
+      }
+    httpRequest.onreadystatechange = ajax_upload;
+    httpRequest.open('POST', url);
+    httpRequest.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    httpRequest.send('data=' + encodeURIComponent(data));
+  }
+
+  function ajax_upload(){
+    try {
+      if (httpRequest.readyState === XMLHttpRequest.DONE) {
+        if (httpRequest.status === 200) {
+          var response = JSON.parse(httpRequest.responseText);
+          console.log(response.path);
+          // test in the array
+        } else {
+          alert("A probleme occured during the com request.");
+        }
+      }
+    }
+    catch( e ) {
+      console.log("a upload dinguerie happened: " + e.description);
+    }
+  }
+
 
   function takepicture() {
       var context = canvas.getContext('2d');

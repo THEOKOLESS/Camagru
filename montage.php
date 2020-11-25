@@ -23,7 +23,7 @@ function add_photo($db, $id, $filename){
       }
     }
     else{
-      header('Location: http://localhost:8080/connexion');
+      header('Location: http://localhost/connexion');
       exit();
    }
 

@@ -52,9 +52,8 @@ function makeRequest_com(url, com, id_photo) {
             // console.log(id_btn)
             var response = JSON.parse(httpRequest.responseText);
             let com_container = document.getElementById("com_container" + response.id_photo);
-            // test in the array
             console.log(response.username + " : " + response.com);
-            com_container.innerHTML += response.username + " : " + response.com
+            com_container.innerHTML += response.username + " : " + response.com // com avec blaze devant
           } else {
             alert("A probleme occured during the com request.");
           }

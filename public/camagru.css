@@ -3,6 +3,7 @@
     height: auto;
     width: 99%;
     display: block;
+   
 }
 
 .liked:hover {
@@ -50,6 +51,7 @@ input[type="number"]
     width: 100%;
     height: 100%;
 }
+
 
 #cat2{
     position: absolute;

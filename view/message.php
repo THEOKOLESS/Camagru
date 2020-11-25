@@ -14,7 +14,7 @@
 			</div>
 		<?php
 		}else if(count($errors) === 0 && $request == '/connexion'){
-			header('Location: http://localhost:8080/');
+			header('Location: http://localhost/');
         	exit();
 		}
 		else if (count($errors) === 0 && $request == '/edit_profile'){
