@@ -43,7 +43,7 @@ function edit_profile($db, $request){
     require('controller/edit_profile.php');
 }
 
-function montage($db){
+function montage($db, $request){
         require('montage.php');
 }
 
@@ -78,7 +78,7 @@ function page404(){
             edit_profile($db, $request);
         break;
         case '/montage':
-            montage($db);
+            montage($db, $request);
         break;
         default:
             page404();

@@ -26,7 +26,7 @@ function request_page(pn){
 			var dataArray = hr.responseText.split("||");
 			var html_output = "";
 		    for(i = 0; i < dataArray.length - 1; i++){
-				var itemArray = '<div class="pic">' + dataArray[i] + '</div>' + <?php echo $_SESSION['id']; ?>;;
+				var itemArray = '<div class="pic">' + dataArray[i] + '</div>'
                 html_output += itemArray;
 			}
 			results_box.innerHTML = html_output ;

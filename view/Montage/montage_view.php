@@ -8,6 +8,7 @@
     <h1>
         Montage photo
     </h1>
+    <?php include("view/message.php");?>
     <div class="camera">
         <video id="video">Video stream not available.</video>
         <img id="not_available" src="public/img/sorry_image_not_available.jpg" class="hide">
@@ -31,12 +32,46 @@
 
         <form  id="form" action="ajaxupload.php" method="post" enctype="multipart/form-data">
             <div id="upload" class="hide">
-                <input id="uploadImage" type="file" accept="image/*" name="image" />
-                
+                <input id="uploadImage" type="file" accept="image/*" name="image" /> <!--name = index de $_FILES -->
                 <div id="preview"><img src="public/img/Upload.png" height="80" width="80"/></div><br>
                 <input id="btn_upload" class="btn btn-success" type="submit" value="Upload">
             </div>
         </form>
+
+        <script>
+              
+                // btn_upload = document.getElementById('btn_upload');
+               
+                // btn_upload.addEventListener('click', function(ev) {
+                // ev.preventDefault();
+                // var form = document.getElementById('form')
+                // img = document.getElementById('uploadImage').files[0];
+                // imgId = document.getElementById('uploadImage');
+              
+              
+                // formData = new FormData(form);
+                // var hr = new XMLHttpRequest();
+                // hr.open("POST", "ajaxupload.php", true);
+                // hr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+                // hr.onreadystatechange = function() {
+                //     if(hr.readyState == 4 && hr.status == 200) {
+                //             console.log(hr.responseText);
+                //     }
+                // }
+                // form.append(imgId, img);
+                // console.log(form);  
+                // hr.send(form);
+                // // var img =; 
+                // // console.log(formData);
+                // // makeRequest_upload('ajaxupload.php');
+                // // accept_btn.classList.remove('hide');
+                //  }, false);
+
+            // function request_upload(path){
+
+            // }
+
+        </script>
         
     <div id="picContainer">
         <img src="public/img/cat1.png" class="thumb">

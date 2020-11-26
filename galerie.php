@@ -105,8 +105,6 @@
             return false;
         return true;
     }
-  
-   
-    include('pagination.php');
-    require('view/Galerie/galerie_view.php'); 
+
+
 ?>

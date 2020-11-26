@@ -83,7 +83,7 @@
       upload = document.getElementById('upload');
       not_available = document.getElementById('not_available');
       accept_btn = document.getElementById('accept_btn');
-      btn_upload = document.getElementById('btn_upload');
+     
 
       navigator.mediaDevices.getUserMedia({
             
@@ -127,45 +127,38 @@
           ev.preventDefault();
       }, false);
 
-      btn_upload.addEventListener('click', function(ev) {
-       
-        // ev.preventDefault();
-        // let data = new FormData(this);
-        // makeRequest_upload('ajaxupload.php');
-        // accept_btn.classList.remove('hide');
-     
-    }, false);
+      
   }
 
 
-  function makeRequest_upload(url) {
-    httpRequest = new XMLHttpRequest();
-    if (!httpRequest) {
-        alert('Abandon :( Impossible de créer une instance de XMLHTTP');
-        return false;
-      }
-    httpRequest.onreadystatechange = ajax_upload;
-    httpRequest.open('POST', url);
-    httpRequest.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-    httpRequest.send('data=' + encodeURIComponent(data));
-  }
+  // function makeRequest_upload(url) {
+  //   httpRequest = new XMLHttpRequest();
+  //   if (!httpRequest) {
+  //       alert('Abandon :( Impossible de créer une instance de XMLHTTP');
+  //       return false;
+  //     }
+  //   httpRequest.onreadystatechange = ajax_upload;
+  //   httpRequest.open('POST', url);
+  //   httpRequest.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+  //   httpRequest.send();
+  // }
 
-  function ajax_upload(){
-    try {
-      if (httpRequest.readyState === XMLHttpRequest.DONE) {
-        if (httpRequest.status === 200) {
-          var response = JSON.parse(httpRequest.responseText);
-          console.log(response.path);
-          // test in the array
-        } else {
-          alert("A probleme occured during the com request.");
-        }
-      }
-    }
-    catch( e ) {
-      console.log("a upload dinguerie happened: " + e.description);
-    }
-  }
+  // function ajax_upload(){
+  //   try {
+  //     if (httpRequest.readyState === XMLHttpRequest.DONE) {
+  //       if (httpRequest.status === 200) {
+  //         var response = ttpRequest.responseText;
+  //         console.log(response);
+  //         // test in the array
+  //       } else {
+  //         alert("A probleme occured during the com request.");
+  //       }
+  //     }
+  //   }
+  //   catch( e ) {
+  //     console.log("a upload dinguerie happened: " + e.description);
+  //   }
+  // }
 
 
   function takepicture() {

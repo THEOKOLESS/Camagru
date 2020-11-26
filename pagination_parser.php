@@ -70,7 +70,13 @@ if(isset($_POST['pn'])){
         $like = $db->query("SELECT * FROM photo INNER JOIN likes ON photo.id=likes.id_photo WHERE photo.file_pic_path='".$img."'");  
         $com =  $db->query("SELECT * FROM photo INNER JOIN coms ON photo.id=coms.id_photo WHERE photo.file_pic_path='".$img."'"); 
         $flag += 1;
-        $pic = file_get_contents("upload/image/" . $img . ".txt"); 
+    //    if(strpos($img, ".") === false)
+    //         $pic = file_get_contents("upload/image/" . $img . ".txt");    
+    //     else
+    //         $pic = "upload/image/" . $img; 
+        $pic = strpos($img, ".") === false ?  file_get_contents("upload/image/" . $img . ".txt") :   "upload/image/" . $img; 
+        // $pic = ($pic = file_get_contents("upload/image/" . $img . ".txt")) ? $pic : "upload/image/" . $img;
+        // $pic ? $pic = $pic : "upload/image/" . $img; 
         // $dataString .=  '<img id=' . 'id_photo' . $flag . ' src=' . $pic . '> ' . '||';
          $dataString .= photo_from_bdd($flag, $pic, $db, $id_photo, $com, $like);
     
