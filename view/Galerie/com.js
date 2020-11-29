@@ -9,7 +9,6 @@ function showcom(){
     if(event.target.classList.contains("com")){
         list.classList.toggle('hide');
     }
-    console.log("ENCULEEE")
 }
 
 
@@ -20,7 +19,7 @@ function post_com(){
     let com_nbr = parseInt(elem_com_nbr.innerHTML, 10)
     let com = document.getElementById("count_value" + id_btn);
     
-
+    console.log(id_photo)
     if (com.value != ""){
         com_nbr += 1;
         elem_com_nbr.textContent = com_nbr + " comments";
@@ -28,7 +27,7 @@ function post_com(){
         com.value = "";
     }
     else
-        alert("n'envoie pas de com vide wsh")
+        alert("why send empty com while you can send so much love ??")
 }
 
 function makeRequest_com(url, com, id_photo) {

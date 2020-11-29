@@ -63,7 +63,8 @@ function request_page(pn){
 	    if(hr.readyState == 4 && hr.status == 200) {
 			var dataArray = hr.responseText.split("||");
 			var html_output = "";
-			
+			if(dataArray.length == 1)
+				html_output ='<img src=public/img/galerie_vide.jpg>'
 		    for(i = 0; i < dataArray.length - 1; i++){
 				var yoArray = dataArray[i].split("|");
 				// yoArray[0].innerHTML = social_js();
