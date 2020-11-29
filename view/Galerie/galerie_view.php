@@ -3,7 +3,10 @@
 <div class="contentarea">
     <h1>Galerie</h1>
     <div id="pagination_controls"></div>
-    <div id="results_box"></div>    
+   
+        <div id="results_box">
+        
+    </div>  
 </div>
 <script src="view/Galerie/like.js"></script>
 <script src="view/Galerie/com.js"></script>

@@ -7,7 +7,7 @@ function likedornot(){
     let like_btn = document.getElementById(id_like);
     let like_counter = document.getElementById("like_counter"+ id);
     var like = parseInt(like_counter.innerHTML, 10); 
-    var id_photo = document.getElementById("id_" + id).value
+    var id_photo = id
    
     if(like_btn.classList.contains("thumb")){
         like_btn.setAttribute('src', 'public/img/liked.png');
@@ -45,8 +45,9 @@ function not_log(){
 function ajax_like(){
     try {
         if (httpRequest.readyState === XMLHttpRequest.DONE) {
-          console.log('like success!');
+          
           if (httpRequest.status === 200) {
+            console.log('like success!');
             // var response = JSON.parse(httpRequest.responseText);
             // return response.json();
             // alert(response.test); // test in the array
