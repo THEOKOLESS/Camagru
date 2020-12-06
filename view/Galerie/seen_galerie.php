@@ -2,8 +2,10 @@
 
 
 function photo_from_bdd($pic, $db, $id_photo, $com, $like){
-    echo'   
-    <img id=id_photo' . $id_photo . ' src=' . $pic .'>
+    echo'  
+    <div class="img1"> 
+        <img  id=id_photo' . $id_photo . ' src=' . $pic .'>
+    </div> 
     <div class="box">
         <div>';
     if(isset($_SESSION['id'])){ 

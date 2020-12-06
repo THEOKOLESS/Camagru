@@ -6,7 +6,7 @@ function name_com($db, $id_user_com, $com){
     $stmt = $db->prepare("SELECT username FROM users WHERE id LIKE :id");
     $stmt->execute(['id' => $id_user_com]);
     $res = $stmt->fetch();
-    echo   '<span style="color:#4682B4;">';
+    echo  '<span style="color:#4682B4;">';
     echo $res['username']  . ': ';
     echo '</span>';
     echo $com ;
@@ -48,12 +48,12 @@ if(isset($_POST['pn'])){
         $id_photo = $data['id'];
         $like = $db->query("SELECT * FROM photo INNER JOIN likes ON photo.id=likes.id_photo WHERE photo.file_pic_path='".$img."'");  
         $com =  $db->query("SELECT * FROM photo INNER JOIN coms ON photo.id=coms.id_photo WHERE photo.file_pic_path='".$img."'"); 
-        $pic = strpos($img, ".") === false ?  file_get_contents("upload/image/" . $img . ".txt") :   "upload/image/" . $img; 
-         $dataString .= photo_from_bdd($pic, $db, $id_photo, $com, $like);
+        $pic = strpos($img, ".") === false ?  "../upload/image/" . $img . ".jpeg" :   "../upload/image/" . $img; 
+        $dataString .= photo_from_bdd($pic, $db, $id_photo, $com, $like);
     
 	}
 	// Echo the results back to Ajax
-	echo $dataString;
+	// echo $dataString;
 	exit();
 }
 ?>

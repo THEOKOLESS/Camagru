@@ -1,3 +1,8 @@
+img {
+    max-width: 100%;
+    max-height: 100%;
+}
+
 #video {
     border: 1px solid black;
     height: auto;
@@ -19,7 +24,7 @@
     font-size: 50px;
     cursor: pointer;
     user-select: none;
-  }
+}
 
 input[type="number"]
 {
@@ -38,12 +43,13 @@ input[type="number"]
   display: flex;
   align-items: flex-start;
   justify-content: space-evenly;
-  }
+}
   
 
 .hide {
     display: none !important;
 }
+
 #cat1{
     position: absolute;
     top: 0;
@@ -71,12 +77,13 @@ input[type="number"]
 
 #photo {
     border: 1px solid black;
-    width: 320px;
-    height: 240px;
 }
 
+#uploadImage{
+    margin: 0 auto; /* center div */ 
+}
 .select{
-    border: 1px solid blue;
+    border: 1px solid rgb(170, 12, 233);
 }
 
  canvas {
@@ -106,6 +113,14 @@ input[type="number"]
 	position: relative;
     top: 0px;
 }
+
+.img1{
+  height: auto;
+  width: 50%;
+  margin: 0 auto; /* center div */ 
+  max-width: 320px;
+}
+
 .output {
     width: 340px;
     display: inline-block;

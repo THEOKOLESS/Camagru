@@ -23,7 +23,7 @@
     <form action="#" method="POST" name="picture">
         
             <input id="startbutton" type="button" value="prendre une photo" />
-            <div class="output">
+            <div class="output img1">
                 <img id="photo" src="" class="hide"> 
             </div>
                 <input type="hidden" id="photo_test" name="photo_test" value=""/><!-- fill in take_picture.js -->
