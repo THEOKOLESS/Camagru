@@ -3,11 +3,7 @@
 $title = 'Insctription'; ?>
 <?php ob_start(); ?>
 
-<head>
-	<link rel="stylesheet" href="public/bootstrap.min.css">
-</head>
-
-	<form action="register" method="POST" class="form-horizontal">
+	<form action="register" method="POST"  class="form-control">
 		<fieldset>
 			<legend>Inscritpion Camagru</legend>
 			<?php include("view/message.php");?>

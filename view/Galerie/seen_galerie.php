@@ -35,9 +35,9 @@ function photo_from_bdd($pic, $db, $id_photo, $com, $like){
                 class="input-xlarge"
                 placeholder="lovely butterfly..."/>';
     if (isset($_SESSION['id'])){
-        echo '<input type="button" value="Oh, what a useful com !"  onclick="post_com()" id="id->' . $id_photo .'"  />'; 
+        echo '<input type="button" class="btn btn-primary " value="Oh, what a useful com !"  onclick="post_com()" id="id->' . $id_photo .'"  />'; 
     }else{
-    echo '<input type="button" value="Oh, what a useful com !"  onclick="not_log()" id="id->' . $id_photo .'"  />'; 
+    echo '<input type="button" class="btn btn-primary " value="Oh, what a useful com !"  onclick="not_log()" id="id->' . $id_photo .'"  />'; 
 
     }
     echo '<div class="coms_container" id="com_container' . $id_photo .'">';

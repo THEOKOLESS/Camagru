@@ -1,7 +1,7 @@
 <?php $title = 'Camagru'; ?>
 <?php ob_start(); ?>
 <div class="contentarea">
-    <h1>Galerie</h1>
+<h1 class="title is-1"> Galerie</h1>
     <div id="pagination_controls"></div>
    
         <div id="results_box">

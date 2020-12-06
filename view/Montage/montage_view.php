@@ -5,7 +5,7 @@
 
 
 <div class="contentarea">
-    <h1>
+<h1 class="title is-1">
         Montage photo
     </h1>
     <?php include("view/message.php");?>
@@ -30,7 +30,7 @@
                 <button value="submit" id="accept_btn" class="hide" name="submit">accepter la photo</button>
     </form>
 
-        <form  id="form" action="controller/ajaxupload.php" method="post" enctype="multipart/form-data">
+        <form  id="form" action="controller/ajaxupload.php" method="post" enctype="multipart/form-data"  class="form-control">
             <div id="upload" class="hide">
                 <input id="uploadImage" type="file" accept="image/*" name="image" /> <!--name = index de $_FILES -->
                 <div id="preview"><img src="public/img/Upload.png" height="80" width="80"/></div><br>
