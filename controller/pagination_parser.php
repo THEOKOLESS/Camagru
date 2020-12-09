@@ -50,8 +50,8 @@ if(isset($_POST['pn'])){
         $com =  $db->query("SELECT * FROM photo INNER JOIN coms ON photo.id=coms.id_photo WHERE photo.file_pic_path='".$img."'"); 
         $pic = strpos($img, ".") === false ?  "../upload/image/" . $img . ".jpeg" :   "../upload/image/" . $img; 
         $dataString .= photo_from_bdd($pic, $db, $id_photo, $com, $like);
+    }
     
-	}
 	// Echo the results back to Ajax
 	// echo $dataString;
 	exit();
