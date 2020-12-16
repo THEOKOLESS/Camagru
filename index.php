@@ -4,6 +4,9 @@ $current_url = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 
 $request = parse_url($current_url, PHP_URL_PATH);
 
+if (substr_count($request, '/') > 1)
+    header('Location: http://localhost/');
+
 try{
   require 'config/setup.php';
 }catch(Exception $e) { // S'il y a eu une erreur, alors...
@@ -47,8 +50,20 @@ function montage($db, $request){
         require('controller/montage.php');
 }
 
+function bad_link($db, $request){
+    require('view/Reset_Mdp/bad_link.php');
+}
+
+function expired_link($db, $request){
+    require('view/Reset_Mdp/expired_link.php');
+}
+
+function pwd_reset($db, $request){
+    require('view/Reset_Mdp/pwd_reset.php');
+}
+
 function page404(){
-    die('Page not found. Please try some different url.');
+    require('view/404.php');
 }
 
     switch($request){
@@ -79,6 +94,15 @@ function page404(){
         break;
         case '/montage':
             montage($db, $request);
+        break;
+        case '/bad_link':
+            bad_link($db, $request);
+        break;
+        case '/expired_link':
+            expired_link($db, $request);
+        break;
+        case '/pwd_reset':
+            pwd_reset($db, $request);
         break;
         default:
             page404();

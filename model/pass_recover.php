@@ -7,9 +7,19 @@ function check_bdd_mail($db, $email, &$errors){
      'email' => $email));
   	 $res = $stmt->fetch();
 	   if(!$res){
-	 	$errors[] = 'Nous n\'avons aucun compte associé à cette email, veuillez verifier votre email';
+	 	$errors[] = 'we don\'t kmow this email !';
 	 	return false;
 	   }
+
+	//    $stmt = $db->prepare("SELECT email FROM password_reset_temp WHERE email LIKE :email");
+  	//  $stmt->execute(array(
+    //  'email' => $email));
+	//    $res = $stmt->fetch();
+	//    if ($res){
+	// 	$errors[] = 'You are aleready reseting !';
+	// 	return false;
+	//    }
+
 	   return true;
 }
 

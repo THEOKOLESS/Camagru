@@ -1,5 +1,7 @@
 <?php
 
+	
+
     function get_user_info_from_username($db, $username){
         $stmt = $db->prepare("SELECT id, pwd, actif, email FROM users WHERE username LIKE :username");
         $stmt->execute(array('username' => $username));
@@ -7,7 +9,14 @@
         return($res);
 	}
 
-
+	function agreed_to_get_mail($db,$id){
+		$stmt = $db->prepare("SELECT email_on_com FROM users WHERE users.id LIKE :id");
+		$stmt->execute(array(
+			'id' => $id));
+			$res = $stmt->fetch();
+			return($res[0]);
+	}
+	
     function get_user_info_from_id($db){
         $stmt = $db->prepare("SELECT username, pwd, actif, email FROM users WHERE id LIKE :id");
         $stmt->execute(['id' => $_SESSION['id']]);
@@ -15,6 +24,10 @@
         return($res);
 	}
 	
+	function update_email_on_com($db, $mail_com){
+		$sql = "UPDATE users SET email_on_com=? WHERE id=?";
+        $db->prepare($sql)->execute([$mail_com, $_SESSION['id']]);
+	}
 
     function update_username_from_username($db, $username){
         $sql = "UPDATE users SET username=? WHERE username=?";

@@ -1,6 +1,3 @@
-
-// var httpRequest;
-
 function showcom(){
 
   let id_com = event.target.id;
@@ -39,19 +36,17 @@ function makeRequest_com(url, com, id_photo) {
     httpRequest.onreadystatechange = ajax_com;
     httpRequest.open('POST', url);
     httpRequest.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-    httpRequest.send('com=' + encodeURIComponent(com) + '&id_photo=' + encodeURIComponent(id_photo)); // like = POST
+    httpRequest.send('com=' + encodeURIComponent(com) + '&id_photo=' + encodeURIComponent(id_photo)); 
   }
 
   function ajax_com(){
     try {
         if (httpRequest.readyState === XMLHttpRequest.DONE) {
           if (httpRequest.status === 200) {
-            // let id_btn = event.target.id.replace(/^\D+/g, ""); 
-            // console.log(id_btn)
             var response = JSON.parse(httpRequest.responseText);
-            let com_container = document.getElementById("com_container" + response.id_photo);
-            console.log(response.username + " : " + response.com);
-            com_container.innerHTML += response.username + " : " + response.com // com avec blaze devant
+            let com_container = document.getElementById("com_container" + response.id_photo_lol);
+            console.log(response.flag);
+            com_container.innerHTML += '<span style="color:#4682B4;">' + response.username + '</span>  : ' + response.com + '<br >'; // com avec blaze devant
           } else {
             alert("A probleme occured during the com request.");
           }

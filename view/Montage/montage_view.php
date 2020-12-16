@@ -22,18 +22,15 @@
             
             </div>
             <canvas id="canvas">  Désolé, votre navigateur ne prend pas en charge &lt;canvas&gt;.</canvas>
-            <form action="#" method="POST" name="picture">
-                
-                    <input id="startbutton" type="button" value="prendre une photo" />
-                    <div class="output img1">
-                        <img id="photo" src="" class="hide"> 
-                    </div>
+            <form action="controller/ajaxupload.php" method="POST" name="picture">
+                    <button id="startbutton" value="submit" type="submit" name="submit">take picture</button>
                         <input type="hidden" id="photo_test" name="photo_test" value=""/><!-- fill in take_picture.js -->
-                        <button value="submit" id="accept_btn" class="hide" name="submit">accepter la photo</button>
+                        <br/>
+                        <input type="hidden" id="selected_image" name="selected_image" value=""/>
             </form>
 
                 <form  id="form" action="controller/ajaxupload.php" method="post" enctype="multipart/form-data"  class="form-control">
-                    <div id="upload" class="hide">
+                    <div id="upload" >
                         <input id="uploadImage" type="file" accept="image/*" name="image" /> <!--name = index de $_FILES -->
                         <div id="preview"><img src="public/img/Upload.png" height="80" width="80"/></div><br>
                         <input id="btn_upload" class="btn btn-success" type="submit" value="Upload">
@@ -84,11 +81,15 @@
         </div>
         <div id="photo_taken" class="column is-one-fifth">
                <?php
-                   $sql = $db->prepare("SELECT file_pic_path FROM photo WHERE id_user LIKE :id");
+                   $sql = $db->prepare("SELECT pic_name FROM photo WHERE id_user LIKE :id  ORDER BY id DESC" );
                    $sql->execute(['id' => $_SESSION['id']]);
                     if($sql->rowCount()){
+                        $flag = 0;
                         while($donnes = $sql->fetch()){
-                            echo'<img src="upload/image/' . $donnes['file_pic_path'] . '">';
+                            $img = $donnes['pic_name'];
+                            $pic = strpos($img, ".") === false ?  "/upload/image/" . $img . ".jpeg" :   "/upload/image/" . $img;
+                            echo'<img id="montage_pic' . $flag. '" src="' . $pic . '" onclick="delete_pic()">';
+                            $flag++;
                         }
                     }
                     else {
@@ -104,5 +105,47 @@
 
 <script src="view/Montage/select.js"></script>
 <script src="view/Montage/take_picture.js"></script>
+
+<script>
+function delete_pic(){
+    id_flag_pic = event.target.id.replace(/^\D+/g, "")
+    elem_pic = document.getElementById("montage_pic"+id_flag_pic)
+    pic = elem_pic.src.split('/').pop();
+    if (confirm('Are you sure you want to delete this amazing photo ?')) {
+        elem_pic.parentNode.removeChild(elem_pic);
+        makeRequest_del_pic('model/del_pic.php', pic);  
+    }
+}
+
+function makeRequest_del_pic(url, pic){
+    httpRequest = new XMLHttpRequest();
+    if (!httpRequest) {
+        alert('Abandon :( Impossible de créer une instance de XMLHTTP');
+        return false;
+      }
+    httpRequest.onreadystatechange = ajax_del_pic;
+    httpRequest.open('POST', url);
+    httpRequest.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    httpRequest.send('pic=' + encodeURIComponent(pic));
+}
+
+function ajax_del_pic(){
+    try {
+        if (httpRequest.readyState === XMLHttpRequest.DONE) {
+          if (httpRequest.status === 200) {
+            var response = JSON.parse(httpRequest.responseText);
+            console.log(response.sql);
+
+          } else {
+            alert("A probleme occured during the com request.");
+          }
+        }
+      }
+      catch( e ) {
+        console.log("a photo del dinguerie happened: " + e.description);
+      }
+}
+</script>
+
 <?php $content = ob_get_clean(); ?>
 <?php require('view/template.php'); ?>

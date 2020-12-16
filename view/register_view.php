@@ -1,15 +1,14 @@
 
 <?php 
-$title = 'Insctription'; ?>
+$title = 'Camagru - Register'; ?>
 <?php ob_start(); ?>
-
-	<form action="register" method="POST"  class="form-control">
-		<fieldset>
-			<legend>Inscritpion Camagru</legend>
-			<?php include("view/message.php");?>
-		<div class="control-group">
+<div class="center">
+	<h1 class="title is-2">Camagru - Register</h1>
+	<?php include("view/message.php");?>
+	<form action="register" method="POST">			
+		<div>
 			<label for="username" class="control-label">Name:</label>
-			<div class="controls">
+			<div>
 				<input type="text"
 					   maxlength="25"
 					   name="username"
@@ -20,9 +19,9 @@ $title = 'Insctription'; ?>
 			</div>
 		</div>
 
-		<div class="control-group">
+		<div>
 			<label for="email" class="control-label">Email:</label>
-			<div class="controls">
+			<div>
 				<input type="email"
 					   maxlength="45"
 					   name="email"
@@ -33,8 +32,8 @@ $title = 'Insctription'; ?>
 					   placeholder="Email"/>
 			</div>
 		</div>
-		<div class="control-group">
-			<label for="pwd" class="control-label">Mot de passe:</label>
+		<div>
+			<label for="pwd" class="control-label">Password</label>
 			<div class="controls">
 				<input type="password"
 					   maxlength="45"
@@ -42,12 +41,12 @@ $title = 'Insctription'; ?>
 				       id="pwd"
 					   value="<?php display_value($errors ? 'pwd' : '');?>"
 				       class="input-xlarge"
-				       placeholder="Mot de passe" />
+				       placeholder="Password" />
 			</div>
 		</div>
 
-		<div class="control-group">
-			<label for="pwd_bis" class="control-label">répeter le mot de passe:</label>
+		<div>
+			<label for="pwd_bis" class="control-label">Reapeat password:</label>
 			<div class="controls">
 				<input type="password"
 					   maxlength="45"
@@ -55,15 +54,14 @@ $title = 'Insctription'; ?>
 				       id="pwd_bis"
 					   value="<?php display_value($errors ? 'pwd_bis' : '');?>"
 				       class="input-xlarge"
-				       placeholder="répeter le mot de passe" />
+				       placeholder="reapeat password" />
 			</div>
 		</div>
-		<div class="control-group">
-			<div class="controls">
+			<div >
 				<input type="submit" name="submit" value="s'inscrire"	class="btn">
 			</div>
-		</div>
-		</fieldset>
+	
 	</form>
+</div>
 <?php $content = ob_get_clean(); ?>
 <?php require('template.php'); ?>

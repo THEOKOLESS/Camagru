@@ -16,6 +16,7 @@ function check_mail($email, &$errors, $db){
 		$errors[] = 'Veuiller rentrer un email valide';
 		return false;
 	}
+	tmp_table($db);
 	if (check_bdd_mail($db, $email, $errors))
 		return true;
 	return false;
@@ -26,7 +27,6 @@ function start_form($db){
 	$errors = array();
 	if(isset($_POST['submit'])){
 		if (check_mail($email, $errors, $db)){
-			tmp_table($db);
 			reset_mail($db, $email, $errors);
 		}
 	}

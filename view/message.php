@@ -4,13 +4,13 @@
 		if(count($errors) === 0 && $request == '/register'){
 		?>
 			<div class="notification is-success is-light">
-				<p>Vous allez recevoir un mail de confirmation a l'adresse indique</p>
+				<p>You will receive a confirmation mail at your email address</p>
 			</div>
 		<?php
         }else if(count($errors) === 0 && $request == '/enter_email'){
         ?>
 			<div class="notification is-success is-light">
-				<p>Vous allez recevoir un mail de reinitialisation a l'adresse indique</p>
+				<p>You will receive a reset-password mail at your email address</p>
 			</div>
 		<?php
 		}else if(count($errors) === 0 && $request == '/connexion'){
@@ -20,27 +20,19 @@
 		else if (count($errors) === 0 && $request == '/edit_profile'){
 			?>
 			<div class="notification is-success is-light">
-				<p>Vos modifications ont bien été enregistrée</p>
+				<p>You'r modifications have been recorded</p>
 			</div>
 		<?php
 		}
 		else if(count($errors) === 0 && $request == '/reset_pwd'){
 			?>
 				<div class="notification is-success is-light">
-					<p>MDP reset avec SUCCES !! </p>
+					<p>Passeord reset</p>
 				</div>
-				<h2>ENCORE BRAVO</h2>
-				<p>tous s'est bien passé :')</p>
+				<h2 class="title is-2">CONGRATULATION :')</h2>
 				<p><a href="connexion">
-				Click maggle</a> pour le tester !</p>
+				Click here !!</a>to test this new awesome password !</p>
 			<?php
-		}
-		else if($request == '/montage'){
-			?>
-			<div class="notification is-success is-light">
-				<p>Wow you are so biutiful my butterfly</p>
-			</div>
-		<?php
 		}
         else{
 		?>
@@ -66,7 +58,7 @@
 			?>
 			<div class="notification is-danger is-light">
 				<?php
-						echo "error : file too big :(";
+						echo "error : imagine a file size bigger than 2mega ... ";
 				?>
 			</div>
 				<?php

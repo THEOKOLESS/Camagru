@@ -6,29 +6,39 @@ function reset_mail($db, $email, &$errors){
 		);
 		$expDate = date("Y-m-d H:i:s",$expFormat);
 		$cle = md5(microtime(TRUE)*100000);
+
+		$stmt = $db->prepare("SELECT email FROM password_reset_temp WHERE email LIKE :email");
+		$stmt->execute(array(
+	  'email' => $email));
+		$res = $stmt->fetch();
+		
+		if ($res){
+			$req = $db->prepare("DELETE FROM `password_reset_temp` WHERE `email`='".$email."';");
+			$req->execute();
+		}
+
 		$req = $db->prepare('INSERT INTO password_reset_temp(email, cle, expDate) VALUES(:email, :cle, :expDate)');
 		$req->execute(array(
 		'email' => $email,
 		'cle' => $cle,
 		'expDate' => $expDate
 		));
-		$entete = "From: Faisconfiancefrr@Gros.Hacker" ;
-		$message = 'Bienvenue sur donnetessous.com,
-
-		Pour reset UI RESEEET ton mdp, veuillez cliquer sur le lien ci-dessous
-		ou copier/coller dans votre navigateur Internet.
+		$headers  = 'MIME-Version: 1.0' . "\r\n";
+		$headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
 		
-		c\'est sans danger fais confiance. 
+		// Additional headers
 		
-		Apres si on te demande tes infos banquaire, tu peux les donner sans craintes, c\'est juste pour un test, y va rien t\'arriver
+		$headers .= 'From: Unsuspisious guy <safe@big.hack>' . "\r\n";
 
-		Vazy clique mon sauce :p =>	http://localhost:8080/reset_pwd?email='.urlencode($email).'&cle='.urlencode($cle).'&action=reset
+		$message = "<html><body>
 
-		---------------
-		Ceci est un mail un peu automatique, si tu reponds tu perds ton temps.';
+		You asked for a  Camagru password recovery. Here is your link => ". "<a href=\"http://localhost/reset_pwd?email=".urlencode($email)."&cle=".urlencode($cle)."&action=reset\">Link</a>
+		</body>
+		</html>";
+		
 		$subject = "Password Recovery - CAMAGRU.com";
 
-		if(!mail($email, $subject, $message, $entete)){
+		if(!mail($email, $subject, $message, $headers)){
 			$errors[] = 'Error sending email';
 	   }
 }

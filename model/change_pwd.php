@@ -1,5 +1,6 @@
 <?php
 function recover_pwd($db, $pwd, $email){
+     
     $pwd = password_hash($pwd, PASSWORD_DEFAULT);
     $req = $db->prepare("UPDATE `users` SET `pwd` = '".$pwd."' WHERE `email`='".$email."';");
     $req->execute();

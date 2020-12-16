@@ -1,9 +1,9 @@
 <?php $title = 'Compte activé'; ?>
 <?php ob_start(); ?>
 
-    <p>Votre compte a bien été activé !"</p>
-    <p>Felicitation !!</p>
-    <a href="connexion">vous pouvez desormais vous connecter</a>
+    <p>Your account is activated  !"</p>
+    <p>Congratulation !!</p>
+    <a href="connexion">Connect therefore here</a>
      
 <?php $content = ob_get_clean(); ?>
 <?php require('view/template.php'); ?>

@@ -4,32 +4,32 @@ function check_password($pwd, &$errors, $pwd_bis){
     $errors_init = $errors;
 
     if($pwd == ''){
-        $errors[] = 'Veuillez rentrer un mot de passe';
+        $errors[] = 'Please, add a password';
     }
     if (strlen($pwd) < 8) {
-        $errors[] = "Votre Mot de passe doit contenir au moins 8 characteres !";
+        $errors[] = "Your password should have at least 8 char !";
     }
 
     if (!preg_match("#[0-9]+#", $pwd)) {
-        $errors[] = "Votre mot de passe doit contenir au moins un chiffre !";
+        $errors[] = "Your password should have at least 1 number !";
     }
 
     if (!preg_match("#[a-zA-Z]+#", $pwd)) {
-        $errors[] = "Votre mot de passe doit contenir au moins une lettre !";
+        $errors[] = "Your password should have at least 1 letter !";
     }
     if (!preg_match("#[a-z]+#", $pwd)) {
-        $errors[] = "Votre mot de passe doit contenir au moins une lettre minuscule !";
+        $errors[] = "Your password should have at least 1 lowercase letter !";
     }
     if (!preg_match("#[A-Z]+#", $pwd)) {
-        $errors[] = "Votre mot de passe doit contenir au moins une lettre majuscule !";
+        $errors[] = "Your password should have at least 1 uppercase letter !";
     }  
 
     if($pwd_bis != ''){
         if ($pwd != $pwd_bis){
-            $errors[] = 'Les mots de passe doivent correspondre';
+            $errors[] = 'Both password have to match';
         }
     }else{
-        $errors[] = 'Veuillez répeter votre mot de passe';
+        $errors[] = 'Please, reapat your password';
     }
 
     return ($errors == $errors_init);
@@ -52,14 +52,14 @@ function check_username(&$errors, $username){
         $namecheck = filter_var($username,FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_HIGH);
         $namecheck = trim($namecheck);
         if($username != $namecheck || strlen($username) > 25 || strlen($username) < 3 ){
-                $errors[] = 'Nom d\'utilisateur invalide';
+                $errors[] = 'I don\'t like this username sorry';
         }
         else if (preg_match('/[^a-z_ \-0-9]/i', $username))
         {
-            $errors[] = 'Nom d\'utilisateur ne doit pas avoir de char trop chelou tas vu';
+            $errors[] = 'Please, choose a normal username... no space or weird char you know ';
         }
     }else{
-        $errors[] = 'Veuiller rentrer un nom d\'utilisateur';
+        $errors[] = 'Please, fill the username field :)';
     }
 
     return ($errors == $errors_init);
@@ -72,10 +72,10 @@ function check_email(&$errors, $email){
     if($email != ''){
         $email = filter_var($email,FILTER_SANITIZE_EMAIL);
         if(!filter_var($email,FILTER_VALIDATE_EMAIL) || strlen($email > 45)){
-            $errors_init[] = 'Veuiller rentrer un email valide';
+            $errors_init[] = 'Don\'t mess with the email field';
         }
     }else{
-        $errors[] = 'Veuiller rentrer un email';
+        $errors[] = 'Please, enter a Email';
     }
 
     return ($errors == $errors_init);

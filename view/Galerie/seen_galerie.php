@@ -19,7 +19,7 @@ function photo_from_bdd($pic, $db, $id_photo, $com, $like){
     else{
             echo '<img id="like'. $id_photo . '" onclick="not_log()" src="public/img/no_like.png" class="thumb liked">';
     } 
-    echo '<span id="like_counter' . $id_photo. '">' . $like->rowCount() . '</span>';
+    echo '<span class="up_like" id="like_counter' . $id_photo. '">' . $like->rowCount() . '</span>';
     echo '</div>
     <div>
         <span class="com" id="count_com_id' . $id_photo .'" onclick="showcom()">';
@@ -28,7 +28,7 @@ function photo_from_bdd($pic, $db, $id_photo, $com, $like){
         </div>
     </div>
 
-    <div id="hidden_com' . $id_photo . '" class="hide">
+    <div id="hidden_com' . $id_photo . '" class="hide in_box">
         <input id="count_value' . $id_photo . '" type="text"
                 maxlength="200"
                 name="com"

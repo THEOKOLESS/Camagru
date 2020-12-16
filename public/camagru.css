@@ -1,12 +1,12 @@
-/* img {
+img {
     max-width: 100%;
     max-height: 100%;
-} */
+}
 
 #video {
     border: 1px solid black;
     height: auto;
-    width: 99%;
+    width: 100%;
     display: block;
    
 }
@@ -52,8 +52,8 @@ input[type="number"]
 
 #cat1{
     position: absolute;
-    top: 0;
-    left: 0;
+    top: 0px;
+    left: 0px;
     width: 100%;
     height: 100%;
 }
@@ -61,8 +61,8 @@ input[type="number"]
 
 #cat2{
     position: absolute;
-    top: 0;
-    left: 0;
+    top:0px;
+    left: 0px;
     width: 100%;
     height: 100%;
 }
@@ -123,14 +123,15 @@ input[type="number"]
 }
 
 .img1{
-  height: auto;
-  width: 50%;
+  height: 240px;
+  width: auto;
   margin: 0 auto; /* center div */ 
   max-width: 320px;
 }
 
 .output {
-    width: 340px;
+    max-width: 340px;
+    width:auto;
     display: inline-block;
 }
 
@@ -141,11 +142,11 @@ input[type="number"]
     margin-right: auto;
     bottom: 36px;
     padding: 5px;
-    background-color: #6a67ce;
+    background-color: #d3d3d3;
     border: 1px solid rgba(255, 255, 255, 0.7);
     font-size: 14px;
     color: rgba(255, 255, 255, 1.0);
-    cursor: pointer;
+    cursor: not-allowed;
 }
 
 .com input[type="number"]{
@@ -157,8 +158,44 @@ input[type="number"]
     text-align: center;
 }
 
+.center{
+    margin: auto;
+  border: 3px solid rgba(17, 31, 17, 0.13);
+  padding: 10px;
+}
+
+.up_like{
+    position: relative;
+    bottom: 6px;
+    left: 4px;
+}
+.in_box{
+    box-shadow: 0 0.5em 1em -0.125em rgba(10,10,10,.1), 0 0 0 1px rgba(10,10,10,.02);
+    color: #4a4a4a;
+    display: block;
+    padding: 0.25rem;
+    position: relative;
+    bottom: 30px;
+}
 
 /* ----- BULMA MODIFICATION ----- */
 .navbar-item .buttons{
     margin-bottom: -8px;
+}
+html,
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+body > footer {
+    margin-top: auto;
+}
+.footer {
+    background-color: #363636;
+    padding: 1.5rem 1.5rem 2rem;
+    color: black;
+}
+.footer strong{
+    color: #d3d3d3;
 }

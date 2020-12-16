@@ -5,10 +5,10 @@ function check_bdd(&$errors, $username, $email, $db)
 		while ($donnees = $reponse->fetch())
 		{
 			if($donnees['username'] == $username){
-				$errors[] = "Nom d'utilisateur deja pris";
+				$errors[] = "Username aleready taken";
 			}
 			 if($donnees['email'] == strtolower($email)){
-				$errors[] = "Email deja pris";
+				$errors[] = "Email aleready taken";
 			 }
 		}	
 		$reponse->closeCursor();

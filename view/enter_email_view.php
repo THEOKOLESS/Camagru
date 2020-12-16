@@ -1,20 +1,17 @@
 <?php 
 $title = 'Mot de passe oublié - Camagru'; ?>
 <?php ob_start(); ?>
-<body>
+<div class="center">
 	<?php include("view/message.php");?>
+    <h1 class="title is-2">Reset password</h1>
 	<form action="enter_email" method="POST">
-		<h2 class="form-title">Reset password</h2>
-		<!-- form validation messages -->
-		<div class="form-group">
 			<label>Your email address</label>
 			<input type="email" name="email">
-		</div>
-		<div class="form-group">
+		<div>
 			<button type="submit" name="submit">Submit</button>
 		</div>
 	</form>
-</body>
+</div>
 
 <?php $content = ob_get_clean(); ?>
 <?php require('view/template.php'); ?>

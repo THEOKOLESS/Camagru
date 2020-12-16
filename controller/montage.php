@@ -1,15 +1,14 @@
 <?php
 
-require('model/add_photo.php');
-
-
  if (isset($_SESSION['id']) && isset($_SESSION['username']) && isset($_SESSION['email'])){
    $errors = array();
       require('view/Montage/montage_view.php');
-      prep_photo($db);
     }
     else{
-      header('Location: http://localhost/connexion');
+      echo '<script type="text/javascript">'; 
+      echo 'alert("Please, log in before tying to go here :)");'; 
+      echo 'window.location.href = "connexion";';
+      echo '</script>';
       exit();
    }
 

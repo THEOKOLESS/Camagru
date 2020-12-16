@@ -13,7 +13,7 @@
 <html>
 <head>
 <script>
-var rpp = <?php echo $rpp; ?>; // results per page // get THIS IN A JS FILE to have the userID
+var rpp = <?php echo $rpp; ?>; // results per page
 var last = <?php echo $last; ?>; // last page number
 
 function request_page(pn){
@@ -30,7 +30,7 @@ function request_page(pn){
 			if(dataArray.length == 1)
 				html_output ='<img src=public/img/galerie_vide.jpg>'
 		    for(i = 0; i < dataArray.length - 1; i++){
-				var itemArray =  '<div class="pic">' + dataArray[i]+ '</div><hr>' // boucle dans le php
+				var itemArray =  '<div class="pic">' + dataArray[i]+ '</div>' // boucle dans le php
 				html_output += itemArray;
 			}
 			results_box.innerHTML = html_output ;

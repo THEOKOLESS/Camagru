@@ -1,22 +1,20 @@
 <?php function send_mail($username, $email, &$errors, $cle){
 
 $destinataire = $email;
-$sujet = "clique ici many" ;
-$entete = "From: Faisconfiancefrr@Gros.Hacker" ;
-$message = 'Bienvenue sur donnetessous.com,
+$sujet = " Camagru - Over here bro " ;
+$headers  = 'MIME-Version: 1.0' . "\r\n";
+$headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
 
-Pour activer votre compte, veuillez cliquer sur le lien ci-dessous
-ou copier/coller dans votre navigateur Internet.
+// Additional headers
 
-c\'est sans danger fais confiance. 
+$headers .= 'From: Unsuspisious guy <safe@big.hack>' . "\r\n";
 
-Apres si on te demande tes infos banquaire, tu peux les donner sans craintes, c\'est juste pour un test, y va rien t\'arriver
+$message = "<html><body>
+<p>Hello ".$username. " ! <br / > Welcome to Camagru, click on this " . "<a href=\"http://localhost/validation?log=".urlencode($username)."&cle=".urlencode($cle)."\">Link</a>. to get your account activated !!!</p>
+</body>
+</html>";
 
-Vazy clique mon sauce :p =>	http://localhost/validation?log='.urlencode($username).'&cle='.urlencode($cle).'
-
----------------
-Ceci est un mail un peu automatique, si tu reponds tu perds ton temps.';
-if(!mail($destinataire, $sujet, $message, $entete)){
+if(!mail($destinataire, $sujet, $message, $headers)){
      $errors[] = 'Error sending email';
      return(false);
 }
