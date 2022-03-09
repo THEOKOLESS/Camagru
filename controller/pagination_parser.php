@@ -41,13 +41,13 @@ if(isset($_POST['pn'])){
 	// This sets the range of rows to query for the chosen $pn
 	$limit = 'LIMIT ' .($pn - 1) * $rpp .',' .$rpp;
 	// This is your query again, it is for grabbing just one page worth of rows by applying $limit
-	$sql = $db->query("SELECT id, pic_name FROM photo ORDER BY id DESC $limit");
+	$sql = $db->query("SELECT id, file_pic_path FROM photo ORDER BY id DESC $limit");
     $dataString = '';
 	while($data = $sql->fetch()){
-        $img = $data['pic_name'];
+        $img = $data['file_pic_path'];
         $id_photo = $data['id'];
-        $like = $db->query("SELECT * FROM photo INNER JOIN likes ON photo.id=likes.id_photo WHERE photo.pic_name='".$img."'");  
-        $com =  $db->query("SELECT * FROM photo INNER JOIN coms ON photo.id=coms.id_photo WHERE photo.pic_name='".$img."'"); 
+        $like = $db->query("SELECT * FROM photo INNER JOIN likes ON photo.id=likes.id_photo WHERE photo.file_pic_path='".$img."'");  
+        $com =  $db->query("SELECT * FROM photo INNER JOIN coms ON photo.id=coms.id_photo WHERE photo.file_pic_path='".$img."'"); 
         $pic = strpos($img, ".") === false ?  "../upload/image/" . $img . ".jpeg" :   "../upload/image/" . $img; 
         $dataString .= photo_from_bdd($pic, $db, $id_photo, $com, $like);
     }

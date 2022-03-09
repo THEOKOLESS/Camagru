@@ -81,12 +81,12 @@
         </div>
         <div id="photo_taken" class="column is-one-fifth">
                <?php
-                   $sql = $db->prepare("SELECT pic_name FROM photo WHERE id_user LIKE :id  ORDER BY id DESC" );
+                   $sql = $db->prepare("SELECT id FROM photo WHERE id_user LIKE :id  ORDER BY id DESC" );
                    $sql->execute(['id' => $_SESSION['id']]);
                     if($sql->rowCount()){
                         $flag = 0;
                         while($donnes = $sql->fetch()){
-                            $img = $donnes['pic_name'];
+                            $img = $donnes['file_pic_path'];
                             $pic = strpos($img, ".") === false ?  "/upload/image/" . $img . ".jpeg" :   "/upload/image/" . $img;
                             echo'<img id="montage_pic' . $flag. '" src="' . $pic . '" onclick="delete_pic()">';
                             $flag++;
