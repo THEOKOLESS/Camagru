@@ -15,17 +15,7 @@ function check_form($db, $request, $email, $errors, &$reset){
         if (count($errors) === 0){
             $reset = !$reset;
             recover_pwd($db, $pwd, $email);
-                   // header('Location: http://localhost/pwd_reset');
-            // include('view/message.php');
         }
-  
-        // else{   
-        //     return $errors ;
-        //     // echo'<div id=shlag>'  ;   
-        //     // include('view/message.php');
-        //     // write_form($email);
-        //     // echo'</div>'  ;  
-        // }
     
     }
     return $errors;
@@ -36,27 +26,20 @@ function start_form($db, $request, &$reset, $errors){
     if (isset($_GET["cle"]) && isset($_GET["email"]) && isset($_GET["action"]) 
     && ($_GET["action"]=="reset")){
         $cle = $_GET["cle"];
-        // $errors = array();
         
         $email = $_GET["email"];
         $curDate = date("Y-m-d H:i:s");
         $reponse = $db->query("SELECT * FROM password_reset_temp WHERE `cle`='".$cle."' and `email`='".$email."';");
         $res = $reponse->fetch();
         if(!$res){
-            // echo('okok');
             $errors[] = 'bad';
-            // require('view/Reset_Mdp/bad_link.php');
-            // header('Location: http://localhost/bad_link');
             }
         else{
                 $expDate = $res['expDate']; 
                 if ($expDate >= $curDate){
                     $errors = check_form($db, $request, $email, $errors, $reset);
                 }else{
-                    $errors[] = 'bad';
-                    // require('view/Reset_Mdp/expired_link.php');
-
-                    // header('Location: http://localhost/expired_link');
+                    $errors[] = 'exp';
                 }
             }
            
@@ -64,9 +47,6 @@ function start_form($db, $request, &$reset, $errors){
         else{ 
             $errors[] = 'bad';
         }
-      
-        
-        // check_form($db, $request);
         return $errors;
     }
   

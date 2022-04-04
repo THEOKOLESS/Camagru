@@ -89,7 +89,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['username']) && isset($_SESSION['e
     $email = $_SESSION['email'];
     $id = $_SESSION['id'];
     $errors = start_form($db);
-    $mail_com = agreed_to_get_mail($db, $id);
+    $mail_com = agreed_to_get_mail($db, $id); // agree to receive mail if someone comment you pic
    
     require('view/Profile/edit_profile_view.php');
 }

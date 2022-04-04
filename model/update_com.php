@@ -18,7 +18,7 @@ $headers .= 'From: Unsuspisious guy <safe@big.hack>' . "\r\n";
 $sujet = $username . ' commented your photo !!!' ;
 
 $message = "<html><body>
-<p>Awesomness !! ". $username . " commented your photo, go check fast what this person had to say on " . "<a href=\"http://localhost/\">Camagru</a>. "."I'am sure it is warm one ! :P </p>
+<p>Awesomness !! ". $username . " commented your photo, go check fast what this person had to say on " . "<a href=\"http://localhost/\">Camagru</a>. "."I'am sure it is a warm one ! :P </p>
 </body>
 </html>" ;
 

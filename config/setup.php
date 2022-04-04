@@ -21,6 +21,7 @@ if($db){
         email VARCHAR(50) NOT NULL,
         cle VARCHAR(32),
         actif INT(6) DEFAULT 0,
+        email_on_com INT(6) DEFAULT 1,
         reg_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
         )";
         $db->prepare($sql)->execute();
