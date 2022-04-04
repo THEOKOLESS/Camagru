@@ -1,7 +1,7 @@
 <?php
 
 function check_password($pwd, &$errors, $pwd_bis){
-    $errors_init = $errors;
+    // $errors_init = $errors;
 
     if($pwd == ''){
         $errors[] = 'Please, add a password';
@@ -32,7 +32,7 @@ function check_password($pwd, &$errors, $pwd_bis){
         $errors[] = 'Please, reapat your password';
     }
 
-    return ($errors == $errors_init);
+    // return ($errors == $errors_init);
 }
 
 

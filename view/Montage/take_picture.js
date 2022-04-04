@@ -37,11 +37,11 @@
           .catch(function(err) {
               if (String(err).substring(0,15) == "NotAllowedError")
                 alert("We can't access your webcam so you are allow to upload a picture of you, but only of you ;)");
-                video.classList.toggle('hide');
-                not_available.classList.toggle('hide');
-                startbutton.classList.toggle('hide');
-                // upload.classList.toggle('hide');
-              console.log("An error occurred: " + err);
+              video.classList.toggle('hide');
+              not_available.classList.toggle('hide');
+              startbutton.classList.toggle('hide');
+              // upload.classList.toggle('hide');
+            console.log("An error occurred: " + err);
           });
 
       video.addEventListener('canplay', function(ev) {
