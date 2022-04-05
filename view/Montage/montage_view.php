@@ -81,14 +81,16 @@
         </div>
         <div id="photo_taken" class="column is-one-fifth">
                <?php
-                   $sql = $db->prepare("SELECT id FROM photo WHERE id_user LIKE :id  ORDER BY id DESC" );
+                   $sql = $db->prepare("SELECT file_pic_path, id FROM photo WHERE id_user LIKE :id  ORDER BY id DESC" );
                    $sql->execute(['id' => $_SESSION['id']]);
                     if($sql->rowCount()){
                         $flag = 0;
                         while($donnes = $sql->fetch()){
                             $img = $donnes['file_pic_path'];
-                            $pic = strpos($img, ".") === false ?  "/upload/image/" . $img . ".jpeg" :   "/upload/image/" . $img;
-                            echo'<img id="montage_pic' . $flag. '" src="' . $pic . '" onclick="delete_pic()">';
+                            $id_img = $donnes['id'];
+                            // echo $img;
+                            $pic = strpos($img, ".") == false ?  "/upload/image/" . $img . ".jpeg" :   "/upload/image/" . $img;
+                            echo'<img id="montage_pic' . $flag. '" src="' . $pic . '" onclick="delete_pic('.$id_img.')">';
                             $flag++;
                         }
                     }
@@ -107,17 +109,18 @@
 <script src="view/Montage/take_picture.js"></script>
 
 <script>
-function delete_pic(){
+function delete_pic(id){
     id_flag_pic = event.target.id.replace(/^\D+/g, "")
     elem_pic = document.getElementById("montage_pic"+id_flag_pic)
+
     pic = elem_pic.src.split('/').pop();
     if (confirm('Are you sure you want to delete this amazing photo ?')) {
         elem_pic.parentNode.removeChild(elem_pic);
-        makeRequest_del_pic('model/del_pic.php', pic);  
+        makeRequest_del_pic('model/del_pic.php', id);  
     }
 }
 
-function makeRequest_del_pic(url, pic){
+function makeRequest_del_pic(url, id){
     httpRequest = new XMLHttpRequest();
     if (!httpRequest) {
         alert('Abandon :( Impossible de créer une instance de XMLHTTP');
@@ -126,7 +129,7 @@ function makeRequest_del_pic(url, pic){
     httpRequest.onreadystatechange = ajax_del_pic;
     httpRequest.open('POST', url);
     httpRequest.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-    httpRequest.send('pic=' + encodeURIComponent(pic));
+    httpRequest.send('pic=' + encodeURIComponent(id));
 }
 
 function ajax_del_pic(){
