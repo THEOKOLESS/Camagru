@@ -1,5 +1,6 @@
 <?php
 session_start();
+// require('controller/Register/send_register_mail.php');
 $current_url = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 
 $request = parse_url($current_url, PHP_URL_PATH);
@@ -70,6 +71,8 @@ function page404(){
         case '/index.php':
         case '/':
             home($db);
+            // send_mail('man', 'theophile.vitoux@gmail.com', $errors, '1234');
+
         break;
         case '/register':
             register($db, $request);

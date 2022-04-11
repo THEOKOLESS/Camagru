@@ -89,7 +89,7 @@
                             $img = $donnes['file_pic_path'];
                             $id_img = $donnes['id'];
                             // echo $img;
-                            $pic = strpos($img, ".") == false ?  "/upload/image/" . $img . ".jpeg" :   "/upload/image/" . $img;
+                            $pic = strpos($img, ".jpeg") !== false ?  "../" . $img  :   "../upload/image/" . $img; 
                             echo'<img id="montage_pic' . $flag. '" src="' . $pic . '" onclick="delete_pic('.$id_img.')">';
                             $flag++;
                         }
@@ -137,15 +137,17 @@ function ajax_del_pic(){
         if (httpRequest.readyState === XMLHttpRequest.DONE) {
           if (httpRequest.status === 200) {
             var response = JSON.parse(httpRequest.responseText);
-            console.log(response.sql);
-
+            // console.log(response.sql);
+            console.log('deleted');
           } else {
             alert("A probleme occured during the com request.");
           }
         }
       }
       catch( e ) {
-        console.log("a photo del dinguerie happened: " + e.description);
+        console.log('photo has been deleted');
+
+        // console.log("a photo del dinguerie happened: " + e.description);
       }
 }
 </script>

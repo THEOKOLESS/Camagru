@@ -48,7 +48,8 @@ if(isset($_POST['pn'])){
         $id_photo = $data['id'];
         $like = $db->query("SELECT * FROM photo INNER JOIN likes ON photo.id=likes.id_photo WHERE photo.file_pic_path='".$img."'");  
         $com =  $db->query("SELECT * FROM photo INNER JOIN coms ON photo.id=coms.id_photo WHERE photo.file_pic_path='".$img."'"); 
-        $pic = strpos($img, ".") === false ?  "../upload/image/" . $img . ".jpeg" :   "../upload/image/" . $img; 
+        $pic = strpos($img, ".jpeg") !== false ?  "../" . $img  :   "../upload/image/" . $img; 
+
         $dataString .= photo_from_bdd($pic, $db, $id_photo, $com, $like);
     }
     
