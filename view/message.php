@@ -14,10 +14,13 @@
 				?>
 					<div class="notification is-success is-light">
 						<p>You will receive a reset-password mail at your email address</p>
+						
 					</div>
 				<?php
+				 header('Location: http://localhost/');
+				 exit();
 				case '/connexion':
-					header('Location: http://localhost/');
+					 header('Location: http://localhost/');
 					exit();
 				case '/edit_profile':
 				?>

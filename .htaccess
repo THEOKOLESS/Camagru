@@ -4,5 +4,15 @@ RewriteEngine On
 
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_URI} !^.*config.*$
+RewriteCond %{REQUEST_URI} !^.*controller.*$
+RewriteCond %{REQUEST_URI} !^.*model.*$
+
+RewriteCond %{REQUEST_URI} !^.*upload.*$
+
+
+
+
+
 
 RewriteRule ^(.+)$ index.php?url=$1 [QSA,L]

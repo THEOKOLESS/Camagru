@@ -28,6 +28,7 @@ function start_form($db){
 	if(isset($_POST['submit'])){
 		if (check_mail($email, $errors, $db)){
 			reset_mail($db, $email, $errors);
+			//  echo 'we stayy';
 		}
 	}
 	return ($errors);

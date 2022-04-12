@@ -3,7 +3,7 @@ session_start();
 require '../config/setup.php';
 require '../model/add_photo.php';
 
-$valid_extensions = array('jpeg', 'jpg', 'png', 'gif', 'bmp' , 'pdf' , 'doc' , 'ppt'); // valid extensions
+$valid_extensions = array('jpeg', 'jpg', 'png', 'gif'); // valid extensions
 $path = '../upload/image/'; // upload directory
 
 if(isset($_POST['submit'])){
