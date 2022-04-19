@@ -9,7 +9,7 @@ $headers = "From: Camagru@big.hack \r\n".'Reply-To: ' . $email. "\r\n".'X-Mailer
 
 // $headers .= 'From: Unsuspisious guy <safe@big.hack>' . "\r\n";
 $message = "
-Hello ".$username. " ! Welcome to Camagru, click on this href=\"http://localhost/validation?log=".urlencode($username)."&cle=".urlencode($cle)."\">Link. to get your account activated !!!
+Hello ".$username. " ! Welcome to Camagru, click on this http://localhost/validation?log=".urlencode($username)."&cle=".urlencode($cle)." Link. to get your account activated !!!
 ";
 // $message = "<html><body>
 // <p>Hello ".$username. " ! <br / > Welcome to Camagru, click on this " . "<a href=\"http://localhost/validation?log=".urlencode($username)."&cle=".urlencode($cle)."\">Link</a>. to get your account activated !!!</p>
